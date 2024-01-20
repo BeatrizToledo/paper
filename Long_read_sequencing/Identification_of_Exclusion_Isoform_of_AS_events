@@ -1,0 +1,25 @@
+library(tidyr) 
+library(tibble) 
+library(plyr) 
+library(dplyr) 
+library(stringr) 
+library(data.table)
+library(mergeutils)
+library(ggforce)
+library(gridExtra)
+library(ggplot2)
+library(viridis)
+library(ggbreak)
+library(scales)
+library(readxl)
+library(unheadr)
+#First step is to filterthe cases that have less than 3 sj
+keeping.order <- function(data, fn, ...) { 
+  col <- ".sortColumn"
+  data[,col] <- 1:nrow(data) 
+  out <- fn(data, ...) 
+  if (!col %in% colnames(out)) stop("Ordering column not preserved by function") 
+  out <- out[order(out[,col]),] 
+  out[,col] <- NULL 
+  out 
+}

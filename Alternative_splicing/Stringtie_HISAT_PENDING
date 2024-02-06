@@ -1,1 +1,35 @@
+module load apps/hisat2/2.0.4
+module load apps/samtools/1.9
+
+#Merged stringtie.mm10.noG10cov.merged.strand.fixed.bed + Pacbio.bed = PCST.bed
+
+#build index
+hisat2_extract_splice_sites.py /Beatriz_Toledo/Whippet.jl/PCST.gtf > /Beatriz_Toledo/Whippet.jl/my_index/mm10.genome.ss
+
+hisat2_extract_exons.py /Beatriz_Toledo/Whippet.jl/PCST.gtf > /Beatriz_Toledo/Whippet.jl/my_index/mm10.genome.exon
+
+hisat2-build -p 66 --exon /Beatriz_Toledo/Whippet.jl/my_index/mm10.genome.exon --ss /Beatriz_Toledo/Whippet.jl/my_index/mm10.genome.ss /Beatriz_Toledo/Whippet.jl/Mus_musculus.GRCm38.dna.primary_assembly.fa /Beatriz_Toledo/Whippet.jl/my_index/mm10.genome_tran
+
+#mapping
+
+hisat2 -p 36 --dta -x /Beatriz_Toledo/Whippet.jl/my_index/mm10.genome_tran -1 /Beatriz_Toledo/Whippet.jl/L222_R1.fastq -2 /Beatriz_Toledo/Whippet.jl/L222_R2.fastq -S /Beatriz_Toledo/Whippet.jl/L222.sam
+hisat2 -p 36 --dta -x /Beatriz_Toledo/Whippet.jl/my_index/mm10.genome_tran -1 /Beatriz_Toledo/Whippet.jl/L223_R1.fastq -2 /Beatriz_Toledo/Whippet.jl/L223_R2.fastq -S /Beatriz_Toledo/Whippet.jl/L223.sam
+hisat2 -p 36 --dta -x /Beatriz_Toledo/Whippet.jl/my_index/mm10.genome_tran -1 /Beatriz_Toledo/Whippet.jl/L224_R1.fastq  -2 /Beatriz_Toledo/Whippet.jl/L224_R2.fastq -S /Beatriz_Toledo/Whippet.jl/L224.sam
+hisat2 -p 36 --dta -x /Beatriz_Toledo/Whippet.jl/my_index/mm10.genome_tran -1 /Beatriz_Toledo/Whippet.jl/L355_R1.fastq  -2 /Beatriz_Toledo/Whippet.jl/L355_R2.fastq -S /Beatriz_Toledo/Whippet.jl/L355.sam
+hisat2 -p 36 --dta -x /Beatriz_Toledo/Whippet.jl/my_index/mm10.genome_tran -1 /Beatriz_Toledo/Whippet.jl/L356_R1.fastq  -2 /Beatriz_Toledo/Whippet.jl/L356_R2.fastq -S /Beatriz_Toledo/Whippet.jl/L356.sam
+hisat2 -p 36 --dta -x /Beatriz_Toledo/Whippet.jl/my_index/mm10.genome_tran -1 /Beatriz_Toledo/Whippet.jl/L357_R1.fastq  -2 /Beatriz_Toledo/Whippet.jl/L357_R2.fastq -S /Beatriz_Toledo/Whippet.jl/L357.sam
+hisat2 -p 36 --dta -x /Beatriz_Toledo/Whippet.jl/my_index/mm10.genome_tran -1 /Beatriz_Toledo/Whippet.jl/L393_R1.fastq  -2 /Beatriz_Toledo/Whippet.jl/L393_R2.fastq -S /Beatriz_Toledo/Whippet.jl/L393.sam
+hisat2 -p 36 --dta -x /Beatriz_Toledo/Whippet.jl/my_index/mm10.genome_tran -1 /Beatriz_Toledo/Whippet.jl/L394_R1.fastq  -2 /Beatriz_Toledo/Whippet.jl/L394_R2.fastq -S /Beatriz_Toledo/Whippet.jl/L394.sam
+hisat2 -p 36 --dta -x /Beatriz_Toledo/Whippet.jl/my_index/mm10.genome_tran -1 /Beatriz_Toledo/Whippet.jl/L395_R1.fastq -2 /Beatriz_Toledo/Whippet.jl/L395_R2.fastq -S /Beatriz_Toledo/Whippet.jl/L395.sam
+
+#sort
+samtools sort -@ 40 -o /Beatriz_Toledo/Whippet.jl/L222.bam /Beatriz_Toledo/Whippet.jl/L222.sam 
+samtools sort -@ 40 -o /Beatriz_Toledo/Whippet.jl/L223.bam /Beatriz_Toledo/Whippet.jl/L223.sam 
+samtools sort -@ 40 -o /Beatriz_Toledo/Whippet.jl/L224.bam /Beatriz_Toledo/Whippet.jl/L224.sam 
+samtools sort -@ 40 -o /Beatriz_Toledo/Whippet.jl/L355.bam /Beatriz_Toledo/Whippet.jl/L355.sam 
+samtools sort -@ 60 -o /Beatriz_Toledo/Whippet.jl/L356.bam /Beatriz_Toledo/Whippet.jl/L356.sam 
+samtools sort -@ 40 -o /Beatriz_Toledo/Whippet.jl/L357.bam /Beatriz_Toledo/Whippet.jl/L357.sam 
+samtools sort -@ 60 -o /Beatriz_Toledo/Whippet.jl/L393.bam /Beatriz_Toledo/Whippet.jl/L393.sam
+samtools sort -@ 40 -o /Beatriz_Toledo/Whippet.jl/L394.bam /Beatriz_Toledo/Whippet.jl/L394.sam
+samtools sort -@ 60 -o /Beatriz_Toledo/Whippet.jl/L395.bam /Beatriz_Toledo/Whippet.jl/L395.sam
 

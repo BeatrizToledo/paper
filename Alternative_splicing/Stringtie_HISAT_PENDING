@@ -1,3 +1,38 @@
+#!/bin/bash
+
+module load apps/stringtie/1.3.5
+
+#first see with only the ensembl gtf
+
+stringtie /Beatriz_Toledo/Stringtie/L222.bam -l L222 -p 16 -G /Beatriz_Toledo/Stringtie/mm10.filtered.gtf -o /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/L222.gtf
+stringtie /Beatriz_Toledo/Stringtie/L223.bam -l L223 -p 16 -G /Beatriz_Toledo/Stringtie/mm10.filtered.gtf -o /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/L223.gtf
+stringtie /Beatriz_Toledo/Stringtie/L224.bam -l L224 -p 16 -G /Beatriz_Toledo/Stringtie/mm10.filtered.gtf -o /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/L224.gtf
+stringtie /Beatriz_Toledo/Stringtie/L355.bam -l L355 -p 16 -G /Beatriz_Toledo/Stringtie/mm10.filtered.gtf -o /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/L355.gtf
+stringtie /Beatriz_Toledo/Stringtie/L356.bam -l L356 -p 16 -G /Beatriz_Toledo/Stringtie/mm10.filtered.gtf -o /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/L356.gtf
+stringtie /Beatriz_Toledo/Stringtie/L357.bam -l L357 -p 16 -G /Beatriz_Toledo/Stringtie/mm10.filtered.gtf -o /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/L357.gtf
+stringtie /Beatriz_Toledo/Stringtie/L393.bam -l L393 -p 16 -G /Beatriz_Toledo/Stringtie/mm10.filtered.gtf -o /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/L393.gtf
+stringtie /Beatriz_Toledo/Stringtie/L394.bam -l L394 -p 16 -G /Beatriz_Toledo/Stringtie/mm10.filtered.gtf -o /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/L394.gtf
+stringtie /Beatriz_Toledo/Stringtie/L395.bam -l L395 -p 16 -G /Beatriz_Toledo/Stringtie/mm10.filtered.gtf -o /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/L395.gtf
+
+#merge only mm10
+stringtie --merge -p 16 -G /Beatriz_Toledo/Stringtie/mm10.filtered.gtf -o /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/stringtie.mm10.merged.gtf /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/mergelist.txt
+stringtie --merge -c10 -p 16  -o /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/stringtie.mm10.noG10cov.merged.gtf /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/mergelist.txt
+
+#merge also with PacBio
+stringtie --merge -p 16 -G /Beatriz_Toledo/Stringtie/mm10.filtered.gtf -o /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/stringtie.all.merged.gtf /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/mergelist2.txt
+stringtie --merge -c10 -p 16  -o /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/stringtie.all.noG10cov.merged.gtf /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/mergelist2.txt
+ 
+#re-qunatify
+stringtie -e -B -p 16 -G /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/stringtie.all.noG10cov.merged.gtf -o /Beatriz_Toledo/Stringtie/ballgown/mm10_ensembl_filtered/L222/L222.gtf /Beatriz_Toledo/Stringtie/L222.bam
+stringtie -e -B -p 16 -G /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/stringtie.all.noG10cov.merged.gtf -o /Beatriz_Toledo/Stringtie/ballgown/mm10_ensembl_filtered/L223/L223.gtf /Beatriz_Toledo/Stringtie/L223.bam
+stringtie -e -B -p 16 -G /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/stringtie.all.noG10cov.merged.gtf -o /Beatriz_Toledo/Stringtie/ballgown/mm10_ensembl_filtered/L224/L224.gtf /Beatriz_Toledo/Stringtie/L224.bam
+stringtie -e -B -p 16 -G /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/stringtie.all.noG10cov.merged.gtf -o /Beatriz_Toledo/Stringtie/ballgown/mm10_ensembl_filtered/L355/L355.gtf /Beatriz_Toledo/Stringtie/L355.bam
+stringtie -e -B -p 16 -G /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/stringtie.all.noG10cov.merged.gtf -o /Beatriz_Toledo/Stringtie/ballgown/mm10_ensembl_filtered/L356/L356.gtf /Beatriz_Toledo/Stringtie/L356.bam
+stringtie -e -B -p 16 -G /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/stringtie.all.noG10cov.merged.gtf -o /Beatriz_Toledo/Stringtie/ballgown/mm10_ensembl_filtered/L357/L357.gtf /Beatriz_Toledo/Stringtie/L357.bam
+stringtie -e -B -p 16 -G /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/stringtie.all.noG10cov.merged.gtf -o /Beatriz_Toledo/Stringtie/ballgown/mm10_ensembl_filtered/L393/L393.gtf /Beatriz_Toledo/Stringtie/L393.bam
+stringtie -e -B -p 16 -G /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/stringtie.all.noG10cov.merged.gtf -o /Beatriz_Toledo/Stringtie/ballgown/mm10_ensembl_filtered/L394/L394.gtf /Beatriz_Toledo/Stringtie/L394.bam
+stringtie -e -B -p 16 -G /Beatriz_Toledo/Stringtie/assembly/mm10_ensembl_filtered/stringtie.all.noG10cov.merged.gtf -o /Beatriz_Toledo/Stringtie/ballgown/mm10_ensembl_filtered/L395/L395.gtf /Beatriz_Toledo/Stringtie/L395.bam
+
 module load apps/hisat2/2.0.4
 module load apps/samtools/1.9
 

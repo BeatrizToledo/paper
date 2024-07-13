@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # MODIFY ID OF PACBIO High Quality transcripts FASTA FILE
 # Fasta and csv files given by the facility had the isoform ID unmatched
 # High_QualityIsoforms_1878_hq_transcripts.fasta

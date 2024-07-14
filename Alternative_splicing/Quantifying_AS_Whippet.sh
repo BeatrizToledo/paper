@@ -1,10 +1,11 @@
+#!/bin/bash
+
 #In order to quantify with whippet I need to first generate a single BAM file from the differen cell types
 #prepare bam for Whippet
 #load the modules
 
 qlogin -q all.q -l h_rt=44:00:00 -l mem_free=70G -R yes -now n -pe smp 1
 
-#!/bin/bash
 
 module load apps/samtools/1.9
 

@@ -41,6 +41,9 @@ julia bin/whippet-quant.jl L395_R1.fastq L395_R2.fastq --biascorrect -x  PCSTind
 julia bin/whippet-delta.jl -a L223.psi.gz,L356.psi.gz,L394.psi.gz -b L222.psi.gz,L355.psi.gz,L393.psi.gz -s 3 -o PP.DP.DPSI.diff
 julia bin/whippet-delta.jl -a L224.psi.gz,L357.psi.gz,L395.psi.gz -b L223.psi.gz,L356.psi.gz,L394.psi.gz -s 3 -o DP.N.DPSI.diff
 
+#R
+Rscript Quantifying_AS_Whippet.r
+
 
 
 

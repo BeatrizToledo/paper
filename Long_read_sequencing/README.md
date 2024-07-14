@@ -1,3 +1,11 @@
 Processing of long-read sequencing data with different bioinformatic tools
 
-Includes the steps: 1- alignement HQ transcripts; 2- collapsing HQ transcripts and removal of degraded transcripts; 3 - generation of spport files for SQANTI 3; 4 - classification and removal of artifacts with SQANTI3
+Includes the steps: 
+
+1_alignement_HQ_transcripts
+2_collapsing_transcripts_and_removal_degraded_transcripts
+3_generation_support files_for_SQANTI
+4_classification_removal_artifacts_SQANTI3
+5_Merging_transcriptomes
+6_Identification_isoform_from_AS
+

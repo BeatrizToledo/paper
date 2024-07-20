@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# use with the alignment file from gmap
+# use with the alignment file from gmap highquality_gmap1.sam
 # cDNA Cupcake is run as a singularity image file (.sif) within a Singularity container
 
 

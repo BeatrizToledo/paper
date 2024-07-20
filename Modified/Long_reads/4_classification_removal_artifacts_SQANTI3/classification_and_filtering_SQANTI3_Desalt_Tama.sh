@@ -3,7 +3,7 @@
 #code to classify transcripts and filter artifacts using SQANTI3
 #SQANTI3 is run as a singularity image file (.sif) within a Singularity container
 #use with gtf file generated in step 2 from desalt+tama and isoform (.isoform.results) and splice junction (.twopassSJ.out.tab) quantification obtained in step 3
-#In addition SQANTI3 uses as inputs reference fasta and gtf, cage_peaks and PolyA_motifs files
+#in, addition SQANTI3 uses as inputs reference fasta and gtf, cage_peaks and PolyA_motifs files
 
 #load modules
 module load apps/singularity/3.5.2
@@ -11,9 +11,12 @@ module load apps/singularity/3.5.2
 #classify transcripts
 singularity exec -B /group/crtd_calegari/People/Beatriz_Toledo/DESALTTIRDTRY/Sqantipreli \
     /projects/globalscratch/sqanti3_3.0.sif \
-    sqanti3_qc.py filterdegradationtama.modified.gtf Mus_musculus.GRCm38.101.gtf \
-    Mus_musculus.GRCm38.dna.primary_assembly.fa --cage_peak 1refTSS_v3.3_mouse_coordinate.mm10.bed \
-    --polyA_motif_list PolyA_motif_List_mm10.txt --gtf \
+    sqanti3_qc.py filterdegradationtama.modified.gtf \
+    Mus_musculus.GRCm38.101.gtf \
+    Mus_musculus.GRCm38.dna.primary_assembly.fa \
+    --cage_peak 1refTSS_v3.3_mouse_coordinate.mm10.bed \
+    --polyA_motif_list PolyA_motif_List_mm10.txt \ 
+    --gtf \
     -e filterdegradationtama_nocap_read_PP_DP_N_PP_rsemSTAR_before_SQANTI_L393.isoforms.results,\
 filterdegradationtama_nocap_read_PP_DP_N_PP_rsemSTAR_before_SQANTI_L355.isoforms.results,\
 filterdegradationtama_nocap_read_PP_DP_N_PP_rsemSTAR_before_SQANTI_L222.isoforms.results,\

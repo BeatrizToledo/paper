@@ -2,10 +2,10 @@ Processing of long-read sequencing data with different bioinformatic tools
 
 Includes the steps: 
 
-1_alignement_HQ_transcripts
-2_collapsing_transcripts_and_removal_degraded_transcripts
-3_generation_support files_for_SQANTI
-4_classification_removal_artifacts_SQANTI3
-5_Merging_transcriptomes
-6_Identification_isoform_from_AS
+1_alignement_HQ_transcripts  
+2_collapsing_transcripts_and_removal_degraded_transcripts  
+3_generation_support files_for_SQANTI  
+4_classification_removal_artifacts_SQANTI3  
+5_Merging_transcriptomes  
+6_Identification_isoform_from_AS  
 

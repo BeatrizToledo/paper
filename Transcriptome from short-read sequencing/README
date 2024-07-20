@@ -1,0 +1,1 @@
+This folder contains the code to assmble a transcriptome from paired-end bulk short-reads sequencing data using hisat2 and stringtie.

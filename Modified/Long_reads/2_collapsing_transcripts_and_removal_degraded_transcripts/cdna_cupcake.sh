@@ -5,7 +5,7 @@
 
 
 #load modules
-module load apps/
+module load apps/samtools/1.9
 module load apps/singularity/3.7.1 
 
 # sort .sam for cDNA Cupcake collapse

@@ -12,7 +12,7 @@ module load apps/singularity/3.7.1
 samtools sort -o highquality_gmap1_sorted.sam -O sam highquality_gmap1.sam
 
 
-# cDNA_CUPCAKE collapse
+# cdna_cupcake collapse
 singularity exec -B /Beatriz_Toledo/gc /projects/globalscratch/cdna_cupcake.sif collapse_isoforms_by_sam.py --input hq_transcripts.fasta  -s  highquality_gmap1_sort_cup.sam -o highquality_gmap1_sort_cup --dun-merge-5-shorter --max_fuzzy_junction=5
 
 #filter for degradation

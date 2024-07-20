@@ -60,7 +60,7 @@ stringtie /../map/L393.bam -l L393 -p 16  -o /../assembly/L393.gtf
 stringtie /../map/L394.bam -l L394 -p 16  -o /../assembly/L394.gtf
 stringtie /../map/L395.bam -l L395 -p 16  -o /../assembly/L395.gtf
 
-#assemble the each sample gtf (list them in the mergelist) into a uique assembly using a minimim coverage of 10 reads (c10); do not include the reference gtf in the final assembly 
+#assemble the samples gtfs (list them in the mergelist) into a uique assembly using a minimim coverage of 10 reads (c10); do not include the reference gtf in the final assembly 
 stringtie --merge -c10 -p 16  -o /../assembly/stringtie.mm10.noG10cov.merged.gtf /../mergelist.txt
 
 

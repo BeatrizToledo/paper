@@ -13,7 +13,8 @@ library(ggbreak)
 library(scales)
 library(readxl)
 library(unheadr)
-#First step is to filterthe cases that have less than 3 sj
+
+#Filter out the cases that have less than 3 sj
 keeping.order <- function(data, fn, ...) { 
   col <- ".sortColumn"
   data[,col] <- 1:nrow(data) 

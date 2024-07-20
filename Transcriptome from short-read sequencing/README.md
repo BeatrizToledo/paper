@@ -2,7 +2,7 @@
 
 
 This folder contains the code to assmble a transcriptome from paired-end bulk short-reads sequencing data using hisat2 and stringtie.   
-For this assembly an ensembl mm10 gtf file filtered for trasncripts with high support level (TSL 1 or 2) was used as a reference.  
+For this assembly an ensembl mm10 gtf file filtered for trasncripts with high support level (TSL 1 or 2) was used as a reference: mm10_filtered.gtf  
 The data come from bulk-sequencing of sorted neural stem cells (NSC), committed neural progenitors (NP) and newborn neurons (N) from lateral neocortices of developing mouse brains at embryonic day (E) 14.5. Sequencing was performed in triplicate.    
 <div>
 

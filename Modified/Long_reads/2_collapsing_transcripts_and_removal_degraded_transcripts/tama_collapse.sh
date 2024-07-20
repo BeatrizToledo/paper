@@ -9,15 +9,12 @@ module load apps/python/?
 cat hq.rn.sorted.sam | sed 's/chrM/MT/g' > hq.rn1.sorted.sam
 cat hq.rn1.sorted.sam | sed 's/chr//g' > hq.rn2.sorted.sam
 
-
 #samples were not capped, still generate file with -x capped and -x no_cap to evaluate the degration level 
 python tama_collapse.py -s hq.rn2.sorted.sam -f Mus_musculus.GRCm38.dna.primary_assembly.fa -p  hq.rn.collapse_capped -x capped 
 python tama_collapse.py -s hq.rn2.sorted.sam -f Mus_musculus.GRCm38.dna.primary_assembly.fa -p  hq.rn.collapse_nocap -x no_cap
 
-
 #calculate the degradation signature
 python tama_degradation_signature.py -c hq.rn.collapse_capped.bed -nc hq.rn.collapse_nocap.bed  -o highquality_desalt_collapse_DegSig
-
 
 #filter degraded transcripts with option -e 100 
 tama_remove_fragment_models.py -f filterdegradationtama.bed -o filterdegradationtama1 -e 100

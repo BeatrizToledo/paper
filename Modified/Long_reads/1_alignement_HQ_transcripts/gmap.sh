@@ -1,3 +1,4 @@
+#!/bin/bash
 
 #load modules
 module load apps/gmap

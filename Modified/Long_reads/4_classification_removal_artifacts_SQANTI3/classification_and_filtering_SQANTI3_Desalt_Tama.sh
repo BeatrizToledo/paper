@@ -3,7 +3,7 @@
 #code to classify transcripts and filter artifacts using SQANTI3
 #SQANTI3 is run as a singularity image file (.sif) within a Singularity container
 #use with gtf file generated in step 2 from desalt+tama and isoform (.isoform.results) and splice junction (.twopassSJ.out.tab) quantification obtained in step 3
-#in, addition SQANTI3 uses as inputs reference fasta and gtf, cage_peaks and PolyA_motifs files
+#in addition, SQANTI3 uses as inputs reference fasta and gtf, cage_peaks and PolyA_motifs files
 
 #load modules
 module load apps/singularity/3.5.2

@@ -1,16 +1,22 @@
 
 #!/bin/bash
 
+#load modules
+
 module load apps/hisat2/2.0.4
 module load apps/samtools/1.9
 module load apps/stringtie/1.3.5
+
 
 #build index from a reference gtf file using hisat2
 
 # extract splice sites
 hisat2_extract_splice_sites.py /../mm10_filtered.gtf > /../my_index/mm10_filtered.genome.ss
+
 # extract exons
 hisat2_extract_exons.py /../mm10_filtered.gtf  > /../my_index/mm10_filtered.genome.exon
+
+# Build index
 hisat2-build -p 66 --exon /../my_index/mm10_filtered.genome.exon --ss /../my_index/mm10_filtered.genome.ss /../Mus_musculus.GRCm38.dna.primary_assembly.fa /../my_index/mm10.genome_tran
 
 
@@ -43,6 +49,7 @@ samtools sort -@ 40 -o /../map/L395.bam /../map/L395.sam
 
 # remove SAM files
 rm map/*.sam
+
 
 # make assembly using Stringtie
 

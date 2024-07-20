@@ -10,7 +10,7 @@ rsem-prepare-reference --num-threads 40 --gtf filterdegradationtama.modified.gtf
 
 #calculate isoform expression from short-reads data from the same cell types as for the long-read sequencing,using rsem. Calculate expression for each replicate separately
 
-#sample1 (NSC)  - 3 replicates
+#sample1 (NSC) - 3 replicates
 rsem-calculate-expression --paired-end --strand-specific --star --num-threads 45 --no-bam-output L222_R1.fastq L222_R2.fastq DT.rsemSTAR DT.rsemSTAR_L222
 rsem-calculate-expression --paired-end --strand-specific --star --num-threads 45 --no-bam-output L355_R1.fastq L355_R2.fastq DT.rsemSTAR DT.rsemSTAR_L355
 rsem-calculate-expression --paired-end --strand-specific --star --num-threads 45 --no-bam-output L393_R1.fastq L393_R2.fastq DT.rsemSTAR DT.rsemSTAR_L393

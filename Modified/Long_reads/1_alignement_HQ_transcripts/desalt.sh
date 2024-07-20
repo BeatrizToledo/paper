@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #load module
-module load apps desalt
+module load apps/desalt
 
 #build index from reference fasta files
 deSALT index ref.fa <index_route>

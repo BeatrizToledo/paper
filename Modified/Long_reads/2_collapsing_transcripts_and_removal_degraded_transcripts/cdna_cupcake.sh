@@ -3,14 +3,12 @@
 #use with the alignment file from gmap highquality_gmap1.sam (from step 1)
 #cDNA Cupcake is run as a singularity image file (.sif) within a Singularity container
 
-
 #load modules
 module load apps/samtools/1.9
 module load apps/singularity/3.7.1 
 
 #sort .sam for cDNA Cupcake collapse
 samtools sort -o highquality_gmap1_sorted.sam -O sam highquality_gmap1.sam
-
 
 #cdna_cupcake collapse
 singularity exec -B /Beatriz_Toledo/gc /projects/globalscratch/cdna_cupcake.sif collapse_isoforms_by_sam.py --input hq_transcripts.fasta  -s  highquality_gmap1_sort_cup.sam -o highquality_gmap1_sort_cup --dun-merge-5-shorter --max_fuzzy_junction=5

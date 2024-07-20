@@ -16,7 +16,7 @@ hisat2_extract_splice_sites.py /../mm10_filtered.gtf > /../my_index/mm10_filtere
 # extract exons
 hisat2_extract_exons.py /../mm10_filtered.gtf  > /../my_index/mm10_filtered.genome.exon
 
-# Build index
+# build index
 hisat2-build -p 66 --exon /../my_index/mm10_filtered.genome.exon --ss /../my_index/mm10_filtered.genome.ss /../Mus_musculus.GRCm38.dna.primary_assembly.fa /../my_index/mm10.genome_tran
 
 

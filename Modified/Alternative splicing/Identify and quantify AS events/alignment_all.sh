@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#code to generate aligment file for Whippet, to allow discovery of cryptic events
+
 #load the modules
 module load apps/STAR/2.7.3a
 module load apps/samtools/1.9.

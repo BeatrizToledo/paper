@@ -9,7 +9,9 @@ Includes the steps:
 5_Merging_transcriptomes  
 6_Identification_isoform_from_AS  
 
+
 For step 1) and 2) different tools were used, resulting in two pipelines:  
+
 a) DeSALT (step 1) + Tama (step 2)  
 b) GMAP (step 1) + Cupcake (step2)  
 

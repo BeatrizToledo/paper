@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#code to identify and quantify alternative splicing (AS) events using whippet
+#uses as input .gtf file derived from the merging of gtf files obtained from long- and short-reads sequencing
+#to allow further discovery of criptic events, an alignment file derived from the merging of single short-read replicate alignments to the merged .gtf file is provided
+
 # load the modules
 module load apps/julia/1.6.2
 

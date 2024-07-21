@@ -11,5 +11,5 @@ mkdir DESALT
 deSALT aln ../mouse/ ../long_reads_fasta/hq_transcripts.fasta --thread 15 --seed-step 3 --min-chain-score 27 --max-intron-len 400000  -x ccs -O6,24 -M4 -o ../DESALT/highquality_desalt.sam
 
 #sort with samtools
-samtools sort -@ 40 -o /../highquality_desalt.sorted.sam /../highquality_desalt.sam
+samtools sort -@ 40 -o /../DESALT/highquality_desalt.sorted.sam /../DESALT/highquality_desalt.sam
   

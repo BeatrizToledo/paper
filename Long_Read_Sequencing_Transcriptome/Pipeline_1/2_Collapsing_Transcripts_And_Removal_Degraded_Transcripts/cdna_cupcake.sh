@@ -14,3 +14,8 @@ singularity exec -B /../CUPCAKE /projects/globalscratch/cdna_cupcake.sif collaps
 
 #filter for degradation
 singularity exec -B /../CUPCAKE /projects/globalscratch/cdna_cupcake.sif filter_away_subset.py /../CUPCAKE/highquality_gmap_sorted_cup.collapsed
+
+#make directory for resulst of step 3
+mkdir SQANTI_INPUT
+cd SQANTI_INPUT
+mkdir GMAP_CUPCAKE

@@ -1,9 +1,0 @@
-/../assembly/L222.gtf
-/../assembly/L223.gtf
-/../assembly/L224.gtf
-/../assembly/L355.gtf
-/../assembly/L356.gtf
-/../assembly/L357.gtf
-/../assembly/L393.gtf
-/../assembly/L394.gtf
-/../assembly/L395.gtf

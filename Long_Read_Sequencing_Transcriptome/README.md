@@ -3,7 +3,7 @@ This folder cointains the codes for processing of long-read RNA sequencing data 
 Includes the steps: 
 
 1_Alignement  
-2_Collapsing_Transcripts_And_Removal_Degraded_Transcripts 
+2_Collapsing_Transcripts_And_Removal_Degraded_Transcripts  
 3_Generation_Support_Files_For_SQANTI  
 4_Classification_And_Removal_Artifacts_SQANTI  
 

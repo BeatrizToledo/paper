@@ -26,17 +26,17 @@ mkdir map
 
 #map each replicate
 #sample1 (NSC) - 3 replicates
-hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../L222_R1.fastq -2 /../L222_R2.fastq -S /../map/L222.sam
-hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../L355_R1.fastq -2 /../L355_R2.fastq -S /../map/L355.sam
-hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../L393_R1.fastq -2 /../L393_R2.fastq -S /../map/L393.sam
+hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../short-reads/L222_R1.fastq -2 /../short-reads/L222_R2.fastq -S /../map/L222.sam
+hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../short-reads/L355_R1.fastq -2 /../short-reads/L355_R2.fastq -S /../map/L355.sam
+hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../short-reads/L393_R1.fastq -2 /../short-reads/L393_R2.fastq -S /../map/L393.sam
 #sample2 (NP) - 3 replicates
-hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../L223_R1.fastq -2 /../L223_R2.fastq -S /../map/L223.sam
-hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../L356_R1.fastq -2 /../L356_R2.fastq -S /../map/L356.sam
-hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../L394_R1.fastq -2 /../L394_R2.fastq -S /../map/L394.sam
+hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../short-reads/L223_R1.fastq -2 /../short-reads/L223_R2.fastq -S /../map/L223.sam
+hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../short-reads/L356_R1.fastq -2 /../short-reads/L356_R2.fastq -S /../map/L356.sam
+hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../short-reads/L394_R1.fastq -2 /../short-reads/L394_R2.fastq -S /../map/L394.sam
 #sample3 (N) - 3 replicates
-hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../L224_R1.fastq -2 /../L224_R2.fastq -S /../map/L224.sam
-hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../L357_R1.fastq -2 /../L357_R2.fastq -S /../map/L357.sam
-hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../L395_R1.fastq -2 /../L395_R2.fastq -S /../map/L395.sam
+hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../short-reads/L224_R1.fastq -2 /../short-reads/L224_R2.fastq -S /../map/L224.sam
+hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../short-reads/L357_R1.fastq -2 /../short-reads/L357_R2.fastq -S /../map/L357.sam
+hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../short-reads/L395_R1.fastq -2 /../short-reads/L395_R2.fastq -S /../map/L395.sam
 
 #sort the resulting sam files with samtools
 #sample1 (NSC) - 3 replicates

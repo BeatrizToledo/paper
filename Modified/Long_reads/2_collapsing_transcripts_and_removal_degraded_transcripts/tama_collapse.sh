@@ -28,7 +28,7 @@ tama_remove_fragment_models.py -f filterdegradationtama.bed -o filterdegradation
 #1       PacBio  transcript      3136606 3136668 .       -       .       gene_id "PB.1"; transcript_id "PB.1.1";
 #1       PacBio  exon    3136606 3136668 .       -       .       gene_id "PB.1"; transcript_id "PB.1.1";
 
-#SQANTI accepts gtf with formattinga s the one of cupcake. The gtf of tama must be modified as follows to make it compatible with SQANTI
+#SQANTI accepts gtf with formatting as the one of cupcake. The gtf of tama must be modified as follows to make it compatible with SQANTI
 
 #get gtf file from the bed file
 python tama_convert_bed_gtf_ensembl_no_cds.py filterdegradationtama.bed filterdegradationtama.gtf

@@ -7,4 +7,4 @@
 module load apps/singularity/3.7.1 
 
 #get aboundance of the long reads
-singularity exec -B /../SQANTI_INPUT /projects/globalscratch/cdna_cupcake.sif get_abundance_post_collapse.py /../CUPCAKE/highquality_gmap_sorted_cup.collapsed unpolished.cluster_report.csv
+singularity exec -B /../SQANTI_INPUT/GMAP_CUPCAKE /projects/globalscratch/cdna_cupcake.sif get_abundance_post_collapse.py /../CUPCAKE/highquality_gmap_sorted_cup.collapsed /../long_reads_fasta/unpolished.cluster_report.csv

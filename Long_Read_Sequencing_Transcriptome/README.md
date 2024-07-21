@@ -1,4 +1,4 @@
-This folder cointain the codes for processing of long-read RNA sequencing data to obtain sample-specific transcriptomes. 
+This folder cointains the codes for processing of long-read RNA sequencing data to obtain sample-specific transcriptomes. 
 
 Includes the steps: 
 

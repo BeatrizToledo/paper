@@ -10,7 +10,7 @@ module load apps/julia/1.6.2
 #build an index
 julia bin/whippet-index.jl --fasta /../Mus_musculus.GRCm38.dna.primary_assembly.fa --bam /../All.merged.sorted.rmdup.bam --bam-min-reads 10 --gtf /../mergedpcstr2filtereddegradation.nofus_NOCAP_sqanti_corrected_nofus.gtf -x /../Whippet_results
 
-#quantify event percentage splice in (PSI) for each replicate using short-read sequencing data (outputs a .psi.gz file for each replicate)
+#quantify event percentage splice in (PSI) for each replicate using short-read paired-end sequencing data (_R1.fastq.gz and _R2.fastq.gz). Outputs a .psi.gz file for each replicate)
 #sample1 (NSC) - 3 replicates
 julia bin/whippet-quant.jl /../fastq/L222_R1.fastq.gz /../fastq/L222_R2.fastq.gz --biascorrect -o /../Whippet_results/L222.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L222.whippet.sam
 julia bin/whippet-quant.jl /../fastq/L355_R1.fastq.gz /../fastq/L355_R2.fastq.gz --biascorrect -o /../Whippet_results/L355.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L355.whippet.sam

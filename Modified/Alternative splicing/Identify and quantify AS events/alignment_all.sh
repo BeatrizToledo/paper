@@ -4,7 +4,7 @@
 
 #load the modules
 module load apps/STAR/2.7.3a
-module load apps/samtools/1.9.
+module load apps/samtools/1.9
 
 #build index from the merged gtf file
 STAR --runMode genomeGenerate --genomeDir /../STAR_align_merged_gtf/ --genomeFastaFiles  /../Mus_musculus.GRCm38.dna.primary_assembly.fa --sjdbGTFfile /../mergedpcstr2filtereddegradation.nofus_NOCAP_sqanti_corrected_nofus.gtf   --runThreadN 4

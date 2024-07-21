@@ -5,9 +5,6 @@
 #load modules
 module load apps/STAR/2.7.3a
 
-#make directory for results in SQANTI_INPUT
-mkdir GMAP_CUPCAKE
-
 #generate index from gmap+cupcake gtf file
 STAR --runThreadN 65 --runMode genomeGenerate --genomeDir /../SQANTI_INPUT/GMAP_CUPCAKE/ --genomeFastaFiles Mus_musculus.GRCm38.dna.primary_assembly.fa --sjdbGTFfile /../CUPCAKE/highquality_gmap_sorted_cup.collapsed.filtered.gff --sjdbOverhang 99
 

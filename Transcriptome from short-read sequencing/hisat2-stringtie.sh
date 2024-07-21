@@ -25,7 +25,7 @@ hisat2-build -p 66 --exon /../my_index/mm10_filtered.genome.exon --ss /../my_ind
 # create directory to store mapping results
 mkdir map
 
-#map each sample
+#map each replicate
 hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../L222_R1.fastq -2 /../L222_R2.fastq -S /../map/L222.sam
 hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../L223_R1.fastq -2 /../L223_R2.fastq -S /../map/L223.sam
 hisat2 -p 36 --dta -x /../my_index/mm10.genome_tran -1 /../L224_R1.fastq -2 /../L224_R2.fastq -S /../map/L224.sam
@@ -56,7 +56,7 @@ rm map/*.sam
 # create directory to store assembly results
 mkdir assembly
 
-#assemble each sample
+#assemble each replicate
 stringtie /../map/L222.bam -l L222 -p 16  -o /../assembly/L222.gtf
 stringtie /../map/L223.bam -l L223 -p 16  -o /../assembly/L223.gtf
 stringtie /../map/L224.bam -l L224 -p 16  -o /../assembly/L224.gtf
@@ -67,7 +67,7 @@ stringtie /../map/L393.bam -l L393 -p 16  -o /../assembly/L393.gtf
 stringtie /../map/L394.bam -l L394 -p 16  -o /../assembly/L394.gtf
 stringtie /../map/L395.bam -l L395 -p 16  -o /../assembly/L395.gtf
 
-#assemble the samples gtfs (list them in the mergelist) into a uique assembly using a minimim coverage of 10 reads (c10); do not include the reference gtf in the final assembly 
+#assemble the replicates gtfs (list them in the mergelist) into a uique assembly using a minimim coverage of 10 reads (c10); do not include the reference gtf in the final assembly 
 stringtie --merge -c10 -p 16  -o /../assembly/stringtie.mm10.noG10cov.merged.gtf /../mergelist.txt
 
 

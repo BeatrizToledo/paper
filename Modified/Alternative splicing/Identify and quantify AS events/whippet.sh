@@ -12,17 +12,17 @@ julia bin/whippet-index.jl --fasta /../Mus_musculus.GRCm38.dna.primary_assembly.
 
 #quantify event percentage splice in (PSI) for each replicate using short-read paired-end sequencing data (_R1.fastq.gz and _R2.fastq.gz). Outputs a .psi.gz file for each replicate)
 #sample1 (NSC) - 3 replicates
-julia bin/whippet-quant.jl /../fastq/L222_R1.fastq.gz /../fastq/L222_R2.fastq.gz --biascorrect -o /../Whippet_results/L222.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L222.whippet.sam
-julia bin/whippet-quant.jl /../fastq/L355_R1.fastq.gz /../fastq/L355_R2.fastq.gz --biascorrect -o /../Whippet_results/L355.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L355.whippet.sam
-julia bin/whippet-quant.jl /../fastq/L393_R1.fastq.gz /../fastq/L393_R2.fastq.gz --biascorrect -o /../Whippet_results/L393.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L393.whippet.sam
+julia bin/whippet-quant.jl /../short-reads/L222_R1.fastq.gz /../short-reads/L222_R2.fastq.gz --biascorrect -o /../Whippet_results/L222.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L222.whippet.sam
+julia bin/whippet-quant.jl /../short-reads/L355_R1.fastq.gz /../short-reads/L355_R2.fastq.gz --biascorrect -o /../Whippet_results/L355.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L355.whippet.sam
+julia bin/whippet-quant.jl /../short-reads/L393_R1.fastq.gz /../short-reads/L393_R2.fastq.gz --biascorrect -o /../Whippet_results/L393.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L393.whippet.sam
 #sample2 (NP) - 3 replicates
-julia bin/whippet-quant.jl /../fastq/L223_R1.fastq.gz /../fastq/L223_R2.fastq.gz --biascorrect -o/../Whippet_results/L223.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L223.whippet.sam
-julia bin/whippet-quant.jl /../fastq/L356_R1.fastq.gz /../fastq/L356_R2.fastq.gz --biascorrect -o/../Whippet_results/L356.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L356.whippet.sam
-julia bin/whippet-quant.jl /../fastq/L394_R1.fastq.gz /../fastq/L394_R2.fastq.gz --biascorrect -o/../Whippet_results/L394.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L394.whippet.sam
+julia bin/whippet-quant.jl /../short-reads/L223_R1.fastq.gz /../short-reads/L223_R2.fastq.gz --biascorrect -o/../Whippet_results/L223.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L223.whippet.sam
+julia bin/whippet-quant.jl /../short-reads/L356_R1.fastq.gz /../short-reads/L356_R2.fastq.gz --biascorrect -o/../Whippet_results/L356.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L356.whippet.sam
+julia bin/whippet-quant.jl /../short-reads/L394_R1.fastq.gz /../short-reads/L394_R2.fastq.gz --biascorrect -o/../Whippet_results/L394.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L394.whippet.sam
 #sample3 (N) - 3 replicates
-julia bin/whippet-quant.jl /../fastq/L224_R1.fastq.gz /../fastq/L224_R2.fastq.gz --biascorrect -o/../Whippet_results/L224.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L224.whippet.sam
-julia bin/whippet-quant.jl /../fastq/L357_R1.fastq.gz /../fastq/L357_R2.fastq.gz --biascorrect -o/../Whippet_results/L357.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L357.whippet.sam
-julia bin/whippet-quant.jl /../fastq/L395_R1.fastq.gz /../fastq/L395_R2.fastq.gz --biascorrect -o/../Whippet_results/L395.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L395.whippet.sam
+julia bin/whippet-quant.jl /../short-reads/L224_R1.fastq.gz /../short-reads/L224_R2.fastq.gz --biascorrect -o/../Whippet_results/L224.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L224.whippet.sam
+julia bin/whippet-quant.jl /../short-reads/L357_R1.fastq.gz /../short-reads/L357_R2.fastq.gz --biascorrect -o/../Whippet_results/L357.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L357.whippet.sam
+julia bin/whippet-quant.jl /../short-reads/L395_R1.fastq.gz /../short-reads/L395_R2.fastq.gz --biascorrect -o/../Whippet_results/L395.whippet -x /../Whippet_results/Whippet_results.jls --sam >/../Whippet_results/L395.whippet.sam
 
 #calculate events differential inclusion (DPSI) between samples
 #between NP and NSC

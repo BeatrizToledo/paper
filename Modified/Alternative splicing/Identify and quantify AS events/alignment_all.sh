@@ -9,7 +9,7 @@ module load apps/samtools/1.9.
 #build index from the merged gtf file
 STAR --runMode genomeGenerate --genomeDir /../STAR_align_merged_gtf/ --genomeFastaFiles  /../Mus_musculus.GRCm38.dna.primary_assembly.fa --sjdbGTFfile /../mergedpcstr2filtereddegradation.nofus_NOCAP_sqanti_corrected_nofus.gtf   --runThreadN 4
 
-#align short-read data for each replicate
+#align short-read paired-end sequencing data (_R1.fastq.gz and _R2.fastq.gz) for each replicate 
 #sample1 (NSC) - 3 replicates
 STAR --runThreadN 16 --genomeDir /../STAR_align_merged_gtf/genome  --readFilesCommand zcat  --quantMode GeneCounts --outSAMtype BAM Unsorted --outFileNamePrefix L222 --readFilesIn /../fastq/L222_R1.fastq.gz /../fastq/L222_R2.fastq.gz
 STAR --runThreadN 16 --genomeDir /../STAR_align_merged_gtf/genome  --readFilesCommand zcat  --quantMode GeneCounts --outSAMtype BAM Unsorted --outFileNamePrefix L355 --readFilesIn /../fastq/L355_R1.fastq.gz /../fastq/L355_R2.fastq.gz 

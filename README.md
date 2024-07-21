@@ -14,4 +14,7 @@ Leila Haj Abdullah Alieh\*, Beatriz Cardoso de Toledo\*, Anna Hadarovich, Agnes 
   
 \# corresponding author
 
+
 <div>
+
+![Graphical Abstract](Artboard1.pdf)

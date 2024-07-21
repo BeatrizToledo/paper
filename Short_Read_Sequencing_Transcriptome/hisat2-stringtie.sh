@@ -76,4 +76,4 @@ stringtie /../map/L357.bam -l L357 -p 16  -o /../assembly/L357.gtf
 stringtie /../map/L395.bam -l L395 -p 16  -o /../assembly/L395.gtf
 
 #assemble the replicates gtfs (list them in the mergelist) into a uique assembly using a minimim coverage of 10 reads (c10); do not include the reference gtf in the final assembly 
-stringtie --merge -c10 -p 16  -o /../assembly/stringtie.mm10.noG10cov.merged.gtf /../mergelist.txt
+stringtie --merge -c10 -p 16  -o /../assembly/SRS.gtf /../mergelist.txt

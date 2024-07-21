@@ -1,6 +1,6 @@
 <div align="justify">
 
-This folder contains the code to assemble a transcriptome from paired-end bulk short-reads sequencing data using hisat2 and stringtie.   
+This folder contains the code to assemble a transcriptome from paired-end bulk short-reads sequencing data using hisat2 and stringtie (short_read_sequencing_transcriptome, i.e. SRS.gtf).   
 
 For this assembly, an Ensembl mm10 gtf file filtered for trasncripts with high support level (TSL 1 or 2) was used as a reference: "mm10_filtered.gtf". The reference fasta file "Mus_musculus.GRCm38.dna.primary_assembly.fa" was obtained from Ensembl.
 

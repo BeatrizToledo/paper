@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #load modules
-module load apps/gmap #version?
+module load apps/gmap/2019-06-10
 module load apps/samtools/1.9
 
 #make directory for alignment results

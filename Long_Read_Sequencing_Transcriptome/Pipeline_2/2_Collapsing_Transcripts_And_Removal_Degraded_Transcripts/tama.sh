@@ -44,4 +44,4 @@ python /../tama/tama_go/format_converter/tama_convert_bed_gtf_ensembl_no_cds.py 
 Rscript Modify_Tama_table.r
 
 #get the fasta file from the modified gtf file with gffread
-gffread -w /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered.modified.fa -g Mus_musculus.GRCm38.dna.primary_assembly.fa /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered.modified.gtf
+gffread -w /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered.modified.fa -g /../TAMA/Mus_musculus.GRCm38.dna.primary_assembly.fa /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered.modified.gtf

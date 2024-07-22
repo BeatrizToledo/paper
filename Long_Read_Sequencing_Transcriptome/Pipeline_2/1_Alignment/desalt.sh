@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #load module
-module load apps/desalt #version?
+module load apps/desalt/1.5.5
 module load apps/samtools/1.9
 
 #make directory for alignment results

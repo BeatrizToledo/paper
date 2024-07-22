@@ -2,7 +2,7 @@
 
 # R code for modifying table
 # the transcript of the bed file needs to be replaced with the PB info
-# Important to use the capped.bed file and not the trans_read.bed cause this one is transcripts before collapsing
+# Important to use the nocap.bed file and not the trans_read.bed. trans_read.bed are the transcripts before collapsing
 
 library(stringr) 
 library(dplyr) 

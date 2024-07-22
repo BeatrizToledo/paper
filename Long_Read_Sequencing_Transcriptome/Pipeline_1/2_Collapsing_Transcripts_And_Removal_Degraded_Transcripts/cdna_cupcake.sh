@@ -5,6 +5,7 @@
 
 #load modules
 module load apps/singularity/3.7.1 
+module load apps/cupcake/12.0.0
 
 #make directory for output
 mkdir CUPCAKE

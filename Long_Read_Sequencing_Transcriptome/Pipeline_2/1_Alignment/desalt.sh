@@ -8,7 +8,7 @@ module load apps/samtools/1.9
 mkdir DESALT
 
 #align high-quality long-reads to the index. Use pre-built mouse RDBG index
-deSALT aln ../mouse/ ../long_reads_fasta/hq_transcripts.fasta --thread 15 --seed-step 3 --min-chain-score 27 --max-intron-len 400000  -x ccs -O6,24 -M4 -o ../DESALT/highquality_desalt.sam
+deSALT aln /../mouse_index/ /../long_reads_fasta/hq_transcripts.fasta --thread 15 --seed-step 3 --min-chain-score 27 --max-intron-len 400000  -x ccs -O6,24 -M4 -o /../DESALT/highquality_desalt.sam
 
 #sort with samtools
 samtools sort -@ 40 -o /../DESALT/highquality_desalt_sorted.sam /../DESALT/highquality_desalt.sam

@@ -17,4 +17,7 @@ Leila Haj Abdullah Alieh\*, Beatriz Cardoso de Toledo\*, Anna Hadarovich, Agnes 
 
 <div>
 
-![Graphical Abstract](Artboard1.pdf)
+  ##
+
+![graphical_abstarct3](https://github.com/user-attachments/assets/e2b27237-0931-448a-ba66-77479eca4013)
+

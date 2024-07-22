@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#use with the alignment file from deSALT highquality_desalt_sorted.sam
+#use with the alignment file from deSALT highquality_desalt_sorted.sam (from step 1)
 
 #load modules
 module load apps/python/2.7.0 

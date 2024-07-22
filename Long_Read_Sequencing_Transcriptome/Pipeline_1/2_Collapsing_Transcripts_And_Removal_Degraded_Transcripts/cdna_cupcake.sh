@@ -18,5 +18,5 @@ singularity exec -B /../CUPCAKE /projects/globalscratch/cdna_cupcake.sif filter_
 
 #make directory for resulst of step 3
 mkdir SQANTI_INPUT
-cd SQANTI_INPUT
+cd SQANTI_INPUT/
 mkdir GMAP_CUPCAKE

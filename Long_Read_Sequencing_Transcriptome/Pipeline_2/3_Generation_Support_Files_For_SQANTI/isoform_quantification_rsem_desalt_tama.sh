@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#use with the collapsed and filtered file ilterdegradationtama.modified.gtf from step 2 modified as specified 
+#use with the collapsed and filtered file highquality_desalt_sorted_tama.collapsed_nocap.filtered.modified.gtf from step 2 modified as specified 
 
 #load modules
 module load apps/rsem/1.3.3

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#script to align high quality long-read transcripts to the genome
 #load module
 module load apps/desalt/1.5.5
 module load apps/samtools/1.9

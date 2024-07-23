@@ -1,4 +1,4 @@
-#!/usr/bin/Rscript
+#!/usr/bin/env Rscript
 
 # R code for modifying table
 # the transcript of the bed file needs to be replaced with the PB info

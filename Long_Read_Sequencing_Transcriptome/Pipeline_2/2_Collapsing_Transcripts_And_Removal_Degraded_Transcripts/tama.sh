@@ -24,7 +24,7 @@ python /../tama/tama_collapse.py -s /../DESALT/highquality_desalt_sorted.sam -f 
 python /../tama/tama_go/file_stats/tama_degradation_signature.py -c /../TAMA/highquality_desalt_sorted_tama.collapsed_capped.bed -nc /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.bed  -o /../TAMA/highquality_desalt_tama_collapsed_DegSig
 
 #filter out degraded transcripts with a max difference of 100 nt in the 3' end (option -e 100); keep the longer transcript model 
-python /../tama/tama_go/filter_transcript_models/tama_remove_fragment_models.py -f /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.bed -o /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered.bed -e 100
+python /../tama/tama_go/filter_transcript_models/tama_remove_fragment_models.py -f /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.bed -o /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered -e 100
 
 #get gtf file from the bed file
 python /../tama/tama_go/format_converter/tama_convert_bed_gtf_ensembl_no_cds.py /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered.bed /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered.gtf

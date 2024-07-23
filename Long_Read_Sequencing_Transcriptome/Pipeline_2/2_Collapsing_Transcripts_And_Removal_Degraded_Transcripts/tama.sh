@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#script for collapsing redundant transcripts and removing potentially degraded transcripts
 #use with the alignment file from deSALT highquality_desalt_sorted.sam (from step 1)
 
 #load modules

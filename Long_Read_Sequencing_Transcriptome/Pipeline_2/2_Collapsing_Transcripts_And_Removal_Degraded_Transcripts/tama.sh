@@ -49,3 +49,4 @@ gffread -w /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered.modi
 
 #make directory for resulst of step 3
 mkdir SQANTI_INPUT_DESALT_TAMA
+mkdir SQANTI_DESALT_TAMA

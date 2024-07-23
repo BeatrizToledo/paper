@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #script to generate isoform abundance files for SQANTI3
-#use with the collapsed and filtered file highquality_desalt_sorted_tama.collapsed_nocap.filtered.modified.gtf from step 2 modified as specified 
+#use with the collapsed and filtered file highquality_desalt_sorted_tama.collapsed_nocap.filtered.modified.gtf from step 2
 
 #load modules
 module load apps/rsem/1.3.3

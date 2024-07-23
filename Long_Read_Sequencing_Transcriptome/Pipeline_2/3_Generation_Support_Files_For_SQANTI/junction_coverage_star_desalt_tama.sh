@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#script to generate junction coverage files for SQANTI3
+#script for generating junction coverage files for SQANTI3
 #use with the collapsed and filtered file highquality_desalt_sorted_tama.collapsed_nocap.filtered.modified.gtf from step 2 
 
 #load modules

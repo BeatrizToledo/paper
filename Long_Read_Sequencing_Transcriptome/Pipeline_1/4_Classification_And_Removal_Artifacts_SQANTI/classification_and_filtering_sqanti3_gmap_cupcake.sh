@@ -8,10 +8,10 @@
 #load modules
 module load apps/singularity/3.5.2
 
-# #classify transcripts
+#classify transcripts. command generates multiple files.
 singularity exec -B /../SQANTI_GMAP_CUPCAKE,/../CUPCAKE,/../SQANTI_INPUT_GMAP_CUPCAKE \
     /projects/globalscratch/sqanti3_3.0.sif \
-    sqanti3_qc.py /../CUPCAKE/highquality_gmap_sort_cup.collapsed.filtered.gff \
+    sqanti3_qc.py /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed.filtered.gff \
     /../SQANTI_INPUT_GMAP_CUPCAKE/Mus_musculus.GRCm38.101.gtf \
     /../SQANTI_INPUT_GMAP_CUPCAKE/Mus_musculus.GRCm38.dna.primary_assembly.fa \
     --cage_peak /../SQANTI_INPUT_GMAP_CUPCAKE/1refTSS_v3.3_mouse_coordinate.mm10.bed \
@@ -40,7 +40,7 @@ singularity exec -B /../SQANTI_GMAP_CUPCAKE,/../CUPCAKE,/../SQANTI_INPUT_GMAP_CU
 /../SQANTI_INPUT_GMAP_CUPCAKE/L222_gc_sj.out.tab,\
 /../SQANTI_INPUT_GMAP_CUPCAKE/L393_gc_sj.out.tab
 
-#filter out artifacts and degraded transcript
+#filter out artifacts. command generates multiple files.
 singularity exec -B /../SQANTI_GMAP_CUPCAKE \
     /projects/globalscratch/sqanti3_3.0.sif \
     python /SQANTI3/sqanti3_RulesFilter.py /../SQANTI_GMAP_CUPCAKE/LRS1_classification.txt \

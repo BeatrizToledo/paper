@@ -1,8 +1,9 @@
 #!/usr/bin/env Rscript
 
-# R code for modifying table
-# the transcript of the bed file needs to be replaced with the PB info
-# Important to use the nocap.bed file and not the trans_read.bed. trans_read.bed are the transcripts before collapsing
+#R code for modifying table
+#should be in folder /../TAMA/
+#the transcript of the bed file needs to be replaced with the PB info
+#important to use the nocap.bed file and not the trans_read.bed. trans_read.bed are the transcripts before collapsing
 
 library(stringr) 
 library(dplyr) 

@@ -27,7 +27,7 @@ singularity exec -B /../SQANTI_GMAP_CUPCAKE,/../CUPCAKE,/../SQANTI_INPUT_GMAP_CU
 /../SQANTI_INPUT_GMAP_CUPCAKE/gc.rsemstar_L356.isoforms.results,\
 /../SQANTI_INPUT_GMAP_CUPCAKE/gc.rsemstar_L223.isoforms.results \
     -fl /../SQANTI_INPUT_GMAP_CUPCAKE/highquality_gmap_sorted_cupcake.collapsed_full-length_count.txt \
-    -o /../SQANTI_GMAP_CUPCAKE/LRS1 \ 
+    -o /../SQANTI_GMAP_CUPCAKE/LRS_1 \ 
     --isoAnnotLite \
     --gff3 /../SQANTI_INPUT_GMAP_CUPCAKE/Mus_musculus_GRCm38_Ensembl_86.gff3 \
     -c /../SQANTI_INPUT_GMAP_CUPCAKE/L356_gc_sj.out.tab,\
@@ -43,6 +43,6 @@ singularity exec -B /../SQANTI_GMAP_CUPCAKE,/../CUPCAKE,/../SQANTI_INPUT_GMAP_CU
 #filter out artifacts. command generates multiple files.
 singularity exec -B /../SQANTI_GMAP_CUPCAKE \
     /projects/globalscratch/sqanti3_3.0.sif \
-    python /SQANTI3/sqanti3_RulesFilter.py /../SQANTI_GMAP_CUPCAKE/LRS1_classification.txt \
-    /../SQANTI_GMAP_CUPCAKE/LRS1_corrected.fasta \
-    /../SQANTI_GMAP_CUPCAKE/LRS1_corrected.gtf 
+    python /SQANTI3/sqanti3_RulesFilter.py /../SQANTI_GMAP_CUPCAKE/LRS_1_classification.txt \
+    /../SQANTI_GMAP_CUPCAKE/LRS_1_corrected.fasta \
+    /../SQANTI_GMAP_CUPCAKE/LRS_1_corrected.gtf 

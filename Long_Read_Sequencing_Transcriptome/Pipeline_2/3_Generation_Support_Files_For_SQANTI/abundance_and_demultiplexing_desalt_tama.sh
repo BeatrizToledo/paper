@@ -17,7 +17,7 @@ gffread -w /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.fa -g /../TAM
 python /../tama/tama_go/read_support/tama_read_support_levels.py -f /../TAMA/filelist_trans.txt -o /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap -m /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap_trans_read.bed -mt tama
 
 #run R script to modify table
-Rscript full-length_abundance_post_collapse_desalt_tama.r
+Rscript /../TAMA/full-length_abundance_post_collapse_desalt_tama.r
 
 #load modules
 #make sure you have a git clone of cDNA_Cupcake

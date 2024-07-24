@@ -16,5 +16,6 @@ singularity exec -B /../CUPCAKE,/../long_reads_fasta,/../GMAP /projects/globalsc
 #filter out degraded transcripts. filter_away_subset.py command generates multiple files, including .gff and .abundance.txt 
 singularity exec -B /../CUPCAKE /projects/globalscratch/cdna_cupcake.sif filter_away_subset.py /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed
 
-#make directory for resulst of step 3
+#make directory for resulst of step 3 and 4
 mkdir SQANTI_INPUT_GMAP_CUPCAKE
+mkdir SQANTI_GMAP_CUPCAKE

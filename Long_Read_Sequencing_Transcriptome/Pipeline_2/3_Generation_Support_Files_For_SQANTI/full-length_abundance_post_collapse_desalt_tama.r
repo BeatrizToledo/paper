@@ -14,21 +14,15 @@ library(plyr)
 library(dplyr)
 library(tidyr)
 
-filterdegradationtama<- read.delim("/../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered.gtf", header=FALSE)
 read_support <- read.delim("/../TAMA/highquality_desalt_sorted_tama.collapsed_nocap_read_support.txt")
-
-#only keep the ones not discarded
-filterdegradationtama1<- filterdegradationtama %>% subset(V3 =="transcript", select = c("V9")) %>% separate(V9, into = c("a"), sep = '";')%>%
-mutate (a = gsub('transcript_id "', '', a)) %>% subset(select = c("a"))
 
 read_support %>% separate(support_line, into = c("b", "support_line"), sep = '";')
   separate_rows(support_line, sep = ",") %>%
   subset(select = c("support_line", "merge_trans_id")) %>%
   add_column(length = "NA", is_fl = "Y", stat = "unique") %>%
   subset(select = c("support_line", "length", "is_fl", "stat", "merge_trans_id")) %>%
-  rename(replace = c("support_line" = "id", "merge_trans_id" = "pbid"))%>%
-merge(filterdegradationtama1, by.x="pbid", by.y="a") %>%  subset(select = c("id", "length", "is_fl", "stat", "pbid"))  %>%  mutate(pbid=gsub('G', '"PB.', pbid))%>%
- write.table("/../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered_read_support_modified.txt", sep="\t", quote=FALSE, row.names=FALSE, col.names=TRUE)
+  rename(replace = c("support_line" = "id", "merge_trans_id" = "pbid")) %>%  mutate(pbid=gsub('G', '"PB.', pbid))%>%
+ write.table("/../TAMA/highquality_desalt_sorted_tama.collapsed_nocap_read_support_modified.txt", sep="\t", quote=FALSE, row.names=FALSE, col.names=TRUE)
 
 
 

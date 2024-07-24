@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#script for generating of demultiplexed files, including abundance files for SQANTI3
+#script for generating of demultiplexed files, including full-length abundance files for SQANTI3
 #use with the collapsed file highquality_desalt_sorted_tama.collapsed_nocap.filtered.modified.gtf from step 2 
 
 #load modules

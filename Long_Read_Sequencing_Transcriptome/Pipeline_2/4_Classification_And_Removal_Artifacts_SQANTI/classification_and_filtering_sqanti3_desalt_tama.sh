@@ -6,7 +6,7 @@
 #in addition, SQANTI3 uses as inputs reference fasta and gtf, cage_peaks (refTSS database) and PolyA_motifs (supplied in the SQANTI3 data folder) files
 
 #load modules
-module load apps/singularity/3.5.2
+module load apps/singularity/3.7.1
 
 #classify transcripts
 singularity exec -B /../SQANTI3_DESALT_TAMA,/../TAMA,/../SQANTI_INPUT_DESALT_TAMA \

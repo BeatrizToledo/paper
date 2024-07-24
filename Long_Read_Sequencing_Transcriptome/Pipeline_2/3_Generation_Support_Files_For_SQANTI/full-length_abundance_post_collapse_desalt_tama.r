@@ -1,6 +1,7 @@
 #!/usr/bin/Rscript
 
 #R code for modifying table
+#should be in folder /../TAMA/
 #generate an file that associates m…/../ with PB. and with collumns id length is_fl stat pbid
 #m64012_190727_053041/105120134/ccs   NA   Y   unique   PB.16.1
 #use with filtered file highquality_desalt_sorted_tama.collapsed_nocap.filtered.gtf to obtain the list of transcripts after filtering

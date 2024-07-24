@@ -16,7 +16,7 @@ gffread -w /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed.fasta -g /../CU
 #get abundance of the transcripts
 #command generates multiple files, including .read_stat.txt and .abundance.txt (total abundance of transcript)
 #unpolished.cluster_report.csv  was obtained during Isoseq3 processing
-singularity exec -B /../CUPCAKE /projects/globalscratch/cdna_cupcake.sif get_abundance_post_collapse.py /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed /../long_reads_fasta/unpolished.cluster_report.csv
+singularity exec -B /../CUPCAKE,/../long_reads_fasta /projects/globalscratch/cdna_cupcake.sif get_abundance_post_collapse.py /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed /../long_reads_fasta/unpolished.cluster_report.csv
 
 #use .fa file
 #make sure you have git clone https://github.com/Magdoll/cDNA_Cupcake.git

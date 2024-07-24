@@ -4,10 +4,10 @@
 #use with the alignment file from deSALT highquality_desalt_sorted.sam (from step 1)
 
 #load modules
+#make sure you have a git clone of tama repository
 module load apps/python/2.7.0 
 module load apps/R/4.0.0
-module load apps/gffread/0.12.1
-git clone https://github.com/GenomeRIK/tama
+
 
 #change chromosome nomenclature removing "chr" to make the .sam file compatible with tama
 cat /../DESALT/highquality_desalt.sam | sed 's/chrM/MT/g' > /../DESALT/highquality_desalt_sorted.sam

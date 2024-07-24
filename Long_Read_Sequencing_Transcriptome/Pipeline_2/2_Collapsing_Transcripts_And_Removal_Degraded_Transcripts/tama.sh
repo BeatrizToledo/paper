@@ -16,7 +16,7 @@ cat /../DESALT/highquality_desalt_sorted.sam | sed 's/chr//g' > /../DESALT/highq
 #make directory for tama outputs
 mkdir TAMA
 
-#Collapsing step. tama_collapse.py command generates multiple files, including .bed file.
+#collapsing of redundant transcripts. tama_collapse.py command generates multiple files, including .bed file.
 #samples were not capped, still generate file with -x capped and -x no_cap to evaluate the degration level. 
 python /../tama/tama_collapse.py -s /../DESALT/highquality_desalt_sorted.sam -f Mus_musculus.GRCm38.dna.primary_assembly.fa -p  /../TAMA/highquality_desalt_sorted_tama.collapsed_capped -x capped 
 python /../tama/tama_collapse.py -s /../DESALT/highquality_desalt_sorted.sam -f Mus_musculus.GRCm38.dna.primary_assembly.fa -p  /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap -x no_cap

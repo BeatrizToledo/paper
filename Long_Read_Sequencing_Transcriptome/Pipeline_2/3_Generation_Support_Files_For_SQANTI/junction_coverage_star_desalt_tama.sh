@@ -11,7 +11,6 @@ STAR --runThreadN 65 --runMode genomeGenerate --genomeDir /../SQANTI_INPUT_DESAL
 
 #calculate junction coverage for each cell type from short-read sequencing data using STAR. Calculate expression for each replicate separately
 #will generate multiple files. SJ.out.tab file will be used for SQANTI3
-
 #sample1 (NSC)  - 3 replicates
 STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_DESALT_TAMA/  --readFilesIn /../short-reads/L222_R1.fastq /../short-reads/L222_R2.fastq --outFileNamePrefix /../SQANTI_INPUT_DESALT_TAMA/L222_twopassDT --outSAMtype None --twopassMode Basic
 STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_DESALT_TAMA/  --readFilesIn /../short-reads/L355_R1.fastq /../short-reads/L355_R2.fastq --outFileNamePrefix /../SQANTI_INPUT_DESALT_TAMA/L355_twopassDT --outSAMtype None --twopassMode Basic

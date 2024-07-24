@@ -9,7 +9,7 @@
 module load apps/singularity/3.5.2
 
 # #classify transcripts
-singularity exec -B /../SQANTI/GMAP_CUPCAKE/ \
+singularity exec -B /../SQANTI_GMAP_CUPCAKE,/../CUPCAKE,/../SQANTI_INPUT_GMAP_CUPCAKE \
     /projects/globalscratch/sqanti3_3.0.sif \
     sqanti3_qc.py /../CUPCAKE/highquality_gmap_sort_cup.collapsed.filtered.gff \
     /../SQANTI_INPUT_GMAP_CUPCAKE/Mus_musculus.GRCm38.101.gtf \
@@ -17,32 +17,32 @@ singularity exec -B /../SQANTI/GMAP_CUPCAKE/ \
     --cage_peak /../SQANTI_INPUT_GMAP_CUPCAKE/1refTSS_v3.3_mouse_coordinate.mm10.bed \
     --polyA_motif_list /../SQANTI_INPUT_GMAP_CUPCAKE/PolyA_motif.txt \
     --gtf \
-    -e /../SQANTI_INPUT_GMAP_CUPCAKE/GC.rsemSTAR_L393.isoforms.results,\
-/../SQANTI_INPUT_GMAP_CUPCAKE/GC.rsemSTAR_L355.isoforms.results,\
-/../SQANTI_INPUT_GMAP_CUPCAKE/GC.rsemSTAR_L222.isoforms.results,\
-/../SQANTI_INPUT_GMAP_CUPCAKE/GC.rsemSTAR_L395.isoforms.results,\
-/../SQANTI_INPUT_GMAP_CUPCAKE/GC.rsemSTAR_L357.isoforms.results,\
-/../SQANTI_INPUT_GMAP_CUPCAKE/GC.rsemSTAR_L224.isoforms.results,\
-/../SQANTI_INPUT_GMAP_CUPCAKE/GC.rsemSTAR_L394.isoforms.results,\
-/../SQANTI_INPUT_GMAP_CUPCAKE/GC.rsemSTAR_L356.isoforms.results,\
-/../SQANTI_INPUT_GMAP_CUPCAKE/GC.rsemSTAR_L223.isoforms.results \
+    -e /../SQANTI_INPUT_GMAP_CUPCAKE/gc.rsemstar_L393.isoforms.results,\
+/../SQANTI_INPUT_GMAP_CUPCAKE/gc.rsemstar_L355.isoforms.results,\
+/../SQANTI_INPUT_GMAP_CUPCAKE/gc.rsemstar_L222.isoforms.results,\
+/../SQANTI_INPUT_GMAP_CUPCAKE/gc.rsemstar_L395.isoforms.results,\
+/../SQANTI_INPUT_GMAP_CUPCAKE/gc.rsemstar_L357.isoforms.results,\
+/../SQANTI_INPUT_GMAP_CUPCAKE/gc.rsemstar_L224.isoforms.results,\
+/../SQANTI_INPUT_GMAP_CUPCAKE/gc.rsemstar_L394.isoforms.results,\
+/../SQANTI_INPUT_GMAP_CUPCAKE/gc.rsemstar_L356.isoforms.results,\
+/../SQANTI_INPUT_GMAP_CUPCAKE/gc.rsemstar_L223.isoforms.results \
     -fl /../SQANTI_INPUT_GMAP_CUPCAKE/highquality_gmap_sorted_cupcake.collapsed_full-length_count.txt \
-    -o LRS1 \ 
+    -o /../SQANTI_GMAP_CUPCAKE/LRS1 \ 
     --isoAnnotLite \
     --gff3 /../SQANTI_INPUT_GMAP_CUPCAKE/Mus_musculus_GRCm38_Ensembl_86.gff3 \
-    -c /../SQANTI_INPUT_GMAP_CUPCAKE/L356_twopassGC.out.tab,\
-/../SQANTI_INPUT_GMAP_CUPCAKE/L223_twopassGC.out.tab,\
-/../SQANTI_INPUT_GMAP_CUPCAKE/L394_twopassGC.out.tab,\
-/../SQANTI_INPUT_GMAP_CUPCAKE/L357_twopassGC.out.tab,\
-/../SQANTI_INPUT_GMAP_CUPCAKE/L224_twopassGC.out.tab,\
-/../SQANTI_INPUT_GMAP_CUPCAKE/L395_twopassGC.out.tab,\
-/../SQANTI_INPUT_GMAP_CUPCAKE/L355_twopassGC.out.tab,\
-/../SQANTI_INPUT_GMAP_CUPCAKE/L222_twopassGC.out.tab,\
-/../SQANTI_INPUT_GMAP_CUPCAKE/L393_twopassGC.out.tab
+    -c /../SQANTI_INPUT_GMAP_CUPCAKE/L356_gc_sj.out.tab,\
+/../SQANTI_INPUT_GMAP_CUPCAKE/L223_gc_sj.out.tab,\
+/../SQANTI_INPUT_GMAP_CUPCAKE/L394_gc_sj.out.tab,\
+/../SQANTI_INPUT_GMAP_CUPCAKE/L357_gc_sj.out.tab,\
+/../SQANTI_INPUT_GMAP_CUPCAKE/L224_gc_sj.out.tab,\
+/../SQANTI_INPUT_GMAP_CUPCAKE/L395_gc_sj.out.tab,\
+/../SQANTI_INPUT_GMAP_CUPCAKE/L355_gc_sj.out.tab,\
+/../SQANTI_INPUT_GMAP_CUPCAKE/L222_gc_sj.out.tab,\
+/../SQANTI_INPUT_GMAP_CUPCAKE/L393_gc_sj.out.tab
 
-#filter out artifacts and degraded transcripts #check folders and final names
-singularity exec -B /Beatriz_Toledo/gc/Sqanti \
+#filter out artifacts and degraded transcript
+singularity exec -B /../SQANTI_GMAP_CUPCAKE \
     /projects/globalscratch/sqanti3_3.0.sif \
-    python /SQANTI3/sqanti3_RulesFilter.py GC_sqanti2_classification.txt \
-    GC_sqanti2_corrected.fasta \
-    GC_sqanti2_corrected.gtf #rename LRS1.gtf?
+    python /SQANTI3/sqanti3_RulesFilter.py /../SQANTI_GMAP_CUPCAKE/LRS1_classification.txt \
+    /../SQANTI_GMAP_CUPCAKE/LRS1_corrected.fasta \
+    /../SQANTI_GMAP_CUPCAKE/LRS1_corrected.gtf 

@@ -24,10 +24,10 @@ python /../cDNA_Cupcake/sequence/fa2fq.py /../CUPCAKE/highquality_gmap_sorted_cu
 
 #demultiplexing. mapped_fl_count.txt file contains full-length read counts for each mapped, unique, isoform for each sample
 #flnc.report.csv was obtained during Isoseq3 processing
-python /../cDNA_Cupcake/post_isoseq_cluster/demux_isoseq_with_genome.py --mapped_fafq  /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed.fastq --read_stat /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed.read_stat.txt --classify_csv /../long_reads_fasta/flnc.report.csv -o /../SQANTI_INPUT_GMAP_CUPCAKE/highquality_gmap_sorted_cupcake.collapsed.mapped_fl_count.txt
+python /../cDNA_Cupcake/post_isoseq_cluster/demux_isoseq_with_genome.py --mapped_fafq  /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed.fastq --read_stat /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed.read_stat.txt --classify_csv /../long_reads_fasta/flnc.report.csv -o /../SQANTI_INPUT_GMAP_CUPCAKE/highquality_gmap_sorted_cupcake.collapsed_full-length_count.txt
 
 #generate demultiplexed GFF and FASTA/FASTQ files 
-python /../cDNA_Cupcake/post_isoseq_cluster/demux_by_barcode_groups.py /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed.gff /../SQANTI_INPUT_GMAP_CUPCAKE/highquality_gmap_sorted_cupcake.collapsed.mapped_fl_count.txt /../SQANTI_INPUT_GMAP_CUPCAKE/output_demux_highquality_gmap_sorted_cupcake.collapsed "('bc1001_5p--bc1001_3p','NSC'),('bc1002_5p--bc1002_3p','NP'),('bc1003_5p--bc1003_3p','N’)”
+python /../cDNA_Cupcake/post_isoseq_cluster/demux_by_barcode_groups.py /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed.gff /../SQANTI_INPUT_GMAP_CUPCAKE/highquality_gmap_sorted_cupcake.collapsed_full-length_count.txt /../SQANTI_INPUT_GMAP_CUPCAKE/output_demux_highquality_gmap_sorted_cupcake.collapsed "('bc1001_5p--bc1001_3p','NSC'),('bc1002_5p--bc1002_3p','NP'),('bc1003_5p--bc1003_3p','N’)”
 
 
 

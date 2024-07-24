@@ -26,7 +26,7 @@ singularity exec -B /../SQANTI3_DESALT_TAMA,/../TAMA,/../SQANTI_INPUT_DESALT_TAM
 /../SQANTI_INPUT_DESALT_TAMA/dt.rsemstar_L394.isoforms.results,\
 /../SQANTI_INPUT_DESALT_TAMA/dt.rsemstar_L356.isoforms.results,\
 /../SQANTI_INPUT_DESALT_TAMA/dt.rsemstar_L223.isoforms.results \
-    -fl /../SQANTI_INPUT_DESALT_TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered_full-length_count.txt -o /../SQANTI_DESALT_TAMA/LRS2 \
+    -fl /../SQANTI_INPUT_DESALT_TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered_full-length_count.txt -o /../SQANTI_DESALT_TAMA/LRS_2 \
     --isoAnnotLite --gff3 /../SQANTI_INPUT_DESALT_TAMA/Mus_musculus_GRCm38_Ensembl_86.gff3 \
     -c /../SQANTI_INPUT_DESALT_TAMA/L356_dt_sj.out.tab,/../SQANTI_INPUT_DESALT_TAMA/L223_dt_sj.out.tab,\
 /../SQANTI_INPUT_DESALT_TAMA/L394_dt_sj.out.tab,/../SQANTI_INPUT_DESALT_TAMA/L357_dt_sj.out.tab,\
@@ -37,6 +37,6 @@ singularity exec -B /../SQANTI3_DESALT_TAMA,/../TAMA,/../SQANTI_INPUT_DESALT_TAM
 #filter out artifacts and degraded transcripts
 singularity exec -B /../SQANTI3_DESALT_TAMA \
     /projects/globalscratch/sqanti3_3.0.sif \
-    python /../SQANTI_DESALT_TAMA/sqanti3_RulesFilter.py /SQANTI_DESALT_TAMA/LRS2_classification.txt \
-    /../SQANTI_DESALT_TAMA/LRS2_corrected.fasta \
-    /../SQANTI_DESALT_TAMA/LRS2_corrected.gtf
+    python /../SQANTI_DESALT_TAMA/sqanti3_RulesFilter.py /SQANTI_DESALT_TAMA/LRS_2_classification.txt \
+    /../SQANTI_DESALT_TAMA/LRS_2_corrected.fasta \
+    /../SQANTI_DESALT_TAMA/LRS_2_corrected.gtf

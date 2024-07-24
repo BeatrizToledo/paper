@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#script for generating of demultiplexed files, including abundance files for SQANTI3
+#script for generating of demultiplexed files, including full-length abundance files for SQANTI3
 #use with the collapsed files  from step 2 
 #cDNA Cupcake is run as a singularity image file (.sif) within a Singularity container
 

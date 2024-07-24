@@ -11,7 +11,6 @@ rsem-prepare-reference --num-threads 40 --gtf /../TAMA/highquality_desalt_sorted
 
 #calculate isoform expression from short-reads data from the same cell types as for the long-read sequencing,using rsem. Calculate expression for each replicate separately
 #will generate multiple files/folder. .isoforms.results file will be used for SQANTI3
-
 #sample1 (NSC) - 3 replicates
 rsem-calculate-expression --paired-end --strand-specific --star --num-threads 45 --no-bam-output /../short-reads/L222_R1.fastq /../short-reads/L222_R2.fastq /../SQANTI_INPUT_DESALT_TAMA/DT.rsemSTAR /../SQANTI_INPUT_DESALT_TAMA/DT.rsemSTAR_L222
 rsem-calculate-expression --paired-end --strand-specific --star --num-threads 45 --no-bam-output /../short-reads/L355_R1.fastq /../short-reads/L355_R2.fastq /../SQANTI_INPUT_DESALT_TAMA/DT.rsemSTAR /../SQANTI_INPUT_DESALT_TAMA/DT.rsemSTAR_L355

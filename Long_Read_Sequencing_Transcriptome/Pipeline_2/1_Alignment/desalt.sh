@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #script for long-read transcripts alignment to the genome
+
 #load module
 module load apps/desalt/1.5.5
 module load apps/samtools/1.9

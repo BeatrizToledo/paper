@@ -1,3 +1,3 @@
-/../SQANTI_GMAP_CUPCAKE/LRS_1_classification.filtered_lite.gtf  no_cap
-/../SQANTI_DESALT_TAMA/LRS_2_classification.filtered_lite.gtf  no_cap
+/../SQANTI_GMAP_CUPCAKE/LRS_1.bed  no_cap  1,1,1  LRS1
+/../SQANTI_DESALT_TAMA/LRS_2.bed  no_cap  1,1,1  LRS2
 

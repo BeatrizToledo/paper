@@ -5,6 +5,7 @@
 
 #load modules
 module load apps/python/2.7.0
+module load apps/R/4.0.0
 
 #make directory for output
 mkdir MERGED_TRANSCRIPTOME
@@ -18,3 +19,6 @@ python /../tama/tama_merge.py -f /../MERGED_TRANSCRIPTOME/mergelistlrs1and2.txt 
 
 #convert .bed files into .gtf files
 python /..tama/tama_go/format_converter/tama_convert_bed_gtf_ensembl_no_cds.py /../MERGED_TRANSCRIPTOME/LRSmerged.bed /../MERGED_TRANSCRIPTOME/LRSmerged.gtf
+
+#run R script to modify .gtf to be compatible with other other tools, such as SQANTI
+Rscript /../MERGED_TRANSCRIPTOME/modify_lrsmerged_gtf.r

@@ -1,0 +1,5 @@
+mergedpcstr2filtereddegradationama.nofus.gtf <- read.delim("/group/crtd_calegari/People/Beatriz_Toledo/nocapMerge/mergedpcstr2filtereddegradationama.nofus.gtf", header=FALSE,  quote="'")
+bff2nocap<-mergedpcstr2filtereddegradationama.nofus.gtf %>%
+  mutate(V2=str_replace(mergedpcstr2filtereddegradationama.nofus.gtf$V2,"PBRI", "PacBio"))%>%
+  mutate(V9=gsub('"G', '"PB.', mergedpcstr2filtereddegradationama.nofus.gtf$V9)) 
+write.table(bff2nocap,"/group/crtd_calegari/People/Beatriz_Toledo/nocapMerge/mergedpcstr2filtereddegradationama.nofus.modified.gtf", sep="\t", quote= FALSE , row.name=FALSE, col.names = FALSE)

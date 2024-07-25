@@ -42,7 +42,7 @@ python /../tama/tama_go/format_converter/tama_convert_bed_gtf_ensembl_no_cds.py 
 #1       PacBio  exon    3136606 3136668 .       -       .       gene_id "PB.1"; transcript_id "PB.1.1";
 
 #run R script to modify table
-Rscript /../TAMA/modify_Tama_table.r
+Rscript /../TAMA/modify_tama_table.r
 
 #make directory for resulst of step 3 and 4
 mkdir SQANTI_INPUT_DESALT_TAMA

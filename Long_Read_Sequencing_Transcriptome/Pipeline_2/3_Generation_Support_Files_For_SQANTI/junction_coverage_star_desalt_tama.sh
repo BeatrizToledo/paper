@@ -7,7 +7,7 @@
 module load apps/STAR/2.7.3a
 
 #generate index from desalt+tama gtf file
-STAR --runThreadN 65 --runMode genomeGenerate --genomeDir /../SQANTI_INPUT_DESALT_TAMA/ --genomeFastaFiles /../TAMA/Mus_musculus.GRCm38.dna.primary_assembly.fa --sjdbGTFfile /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered.modified.gtf --sjdbOverhang 99
+STAR --runThreadN 65 --runMode genomeGenerate --genomeDir /../SQANTI_INPUT_DESALT_TAMA/ --genomeFastaFiles /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa --sjdbGTFfile /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered.modified.gtf --sjdbOverhang 99
 
 #calculate junction coverage for each cell type from short-read sequencing data using STAR. Calculate expression for each replicate separately
 #will generate multiple files. SJ.out.tab file will be used for SQANTI3

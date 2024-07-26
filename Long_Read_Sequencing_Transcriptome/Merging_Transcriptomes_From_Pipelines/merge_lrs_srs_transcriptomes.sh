@@ -5,6 +5,7 @@
 
 #load modules
 module load apps/python/2.7.0
+module load apps/R/4.0.0
 
 #convert .gtf files into .bed files
 python /../tama/tama_go/format_converter/tama_format_gtf_to_bed12_stringtie.py  /../stringtie_.gtf /../stringtie__.bed

@@ -7,7 +7,7 @@
 module load apps/rsem/1.3.3
 
 #prepare the reference
-rsem-prepare-reference --num-threads 40 --gtf /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered.modified.gtf --star /../TAMA/Mus_musculus.GRCm38.dna.primary_assembly.fa /../SQANTI_INPUT_DESALT_TAMA/DT.rsemSTAR
+rsem-prepare-reference --num-threads 40 --gtf /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered.modified.gtf --star /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa /../SQANTI_INPUT_DESALT_TAMA/DT.rsemSTAR
 
 #calculate isoform expression from short-reads data from the same cell types as for the long-read sequencing,using rsem. Calculate expression for each replicate separately
 #will generate multiple files/folder. .isoforms.results file will be used for SQANTI3

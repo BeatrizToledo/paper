@@ -9,7 +9,7 @@ module load apps/python/2.7.0
 module load apps/gffread/0.12.1
 
 #get the fasta file from the gtf file with gffread
-gffread -w /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.fa -g /../TAMA/Mus_musculus.GRCm38.dna.primary_assembly.fa /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.gtf
+gffread -w /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.fa -g /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.gtf
 
 #get the abundance levels of the transcripts 
 #_trans_read.bed file shows transcript model for each read based on the mapping prior to collapsing. was obtained in the collapsing from step 2

@@ -1,0 +1,3 @@
+#!/bin/bash
+#script to classify transcripts from merged transcriptome (LRS_SRS_merged_modified.gtf) and remove fusion transcripts from merged and not merged transcriptome
+

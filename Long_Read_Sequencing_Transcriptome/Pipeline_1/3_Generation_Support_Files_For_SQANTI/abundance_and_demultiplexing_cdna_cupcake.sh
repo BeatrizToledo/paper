@@ -11,7 +11,7 @@ module load apps/gffread/0.12.1
 module load apps/python3/3.7.0
 
 #get the fasta file from .gtf file with gffread
-gffread -w /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed.fasta -g /../CUPCAKE/Mus_musculus.GRCm38.dna.primary_assembly.fa /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed.gff
+gffread -w /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed.fasta -g /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed.gff
 
 #get abundance of the transcripts
 #command generates multiple files, including .read_stat.txt and .abundance.txt (total abundance of transcript)

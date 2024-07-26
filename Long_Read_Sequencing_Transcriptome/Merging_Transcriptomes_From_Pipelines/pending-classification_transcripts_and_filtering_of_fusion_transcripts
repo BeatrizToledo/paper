@@ -1,0 +1,47 @@
+#!/bin/bash
+
+#script for classifying transcripts and filtering fusion transcripts using SQANTI3
+#SQANTI3 is run as a singularity image file (.sif) within a Singularity container
+#use final merged transcriptome (LRS_SRS_merged_modified.gtf)
+
+use with gtf file generated in step 2 and full-length (full-length_count.txt), isoform (.isoform.results) and splice junction (.twopassSJ.out.tab) quantification obtained in step 3
+#in addition, SQANTI3 uses as inputs reference fasta and gtf, cage_peaks (refTSS database) and PolyA_motifs (supplied in the SQANTI3 data folder) files
+
+#load modules
+module load apps/singularity/3.7.1
+
+#classification of transcripts from final merged transcriptome
+singularity exec -B /../MERGED_TRANSCRIPTOME,/../REFERENCE_INPUT /projects/globalscratch/sqanti3_3.0.sif sqanti3_qc.py \
+/../MERGED_TRANSCRIPTOME/LRS_SRS_merged_modified.gtf /../REFERENCE_INPUT/Mus_musculus.GRCm38.101.gtf /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa \
+--cage_peak /../REFERENCE_INPUT/1refTSS_v3.3_mouse_coordinate.mm10.bed --polyA_motif_list  /../REFERENCE_INPUT/PolyA_motif_List_mm10.txt  \
+--gtf -o /../MERGED_TRANSCRIPTOME/LRS_SRS_merged_modified  --isoAnnotLite --gff3 /../REFERENCE_INPUT/Mus_musculus_GRCm38_Ensembl_86.gff3 
+
+#select fusion transcripts from LRS_SRS_merged_modified
+R
+PCSTRnofusion <- mergedpcstr2filtereddegradationama.nofus_NOCAP_sqanti_classification %>% subset(structural_category != "fusion", select = c("isoform", "structural_category")) %>% rename(structural_category_pcst = structural_category) 
+
+#classification with refseq and gencode
+singularity exec -B /../MERGED_TRANSCRIPTOME,/../REFERENCE_INPUT /projects/globalscratch/sqanti3_3.0.sif sqanti3_qc.py  /../MERGED_TRANSCRIPTOME/LRS_SRS_merged_modified.gtf /../REFERENCE_INPUT/mm10.ncbiRefSeq2.gtf /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa   --gtf -o LRS_SRS_merged_modified_refseq --skipORF --skip_report
+singularity exec -B /../MERGED_TRANSCRIPTOME,/../REFERENCE_INPUT /projects/globalscratch/sqanti3_3.0.sif sqanti3_qc.py  /../MERGED_TRANSCRIPTOME/LRS_SRS_merged_modified.gtf /../REFERENCE_INPUT/gencode.vM10.primary_assembly.annotation.gtf /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa   --gtf -o LRS_SRS_merged_modified_gencode --skipORF —skip_report
+
+#classification considering ensembl, refseq and gencode
+R
+mergedpcstr.nofus_NOCAP_enssqanti_class_stcat <- mergedpcstr2.nofus_NOCAP_sqanti_classification%>% subset(structural_category != "fusion",select  = c("isoform", "structural_category","subcategory")) %>% rename_with(.cols = c(2,3), ~glue::glue("Ens{.}"))
+97240
+mergedpcstr2.nofus_NOCAP_gencodesqanti_class_stcat <- mergedpcstr2filtereddegradationama.nofus_NOCAP_gencodesqanti_class%>% subset(structural_category != "fusion",select  = c("isoform", "structural_category","subcategory")) %>% rename_with(.cols = c(2,3), ~glue::glue("gencod{.}"))
+mergedpcstr2.nofus_NOCAP_RefSeqsqanti_class_stcat <- mergedpcstr2filtereddegradationama.nofus_NOCAP_RefSeqsqanti_class%>% subset(structural_category != "fusion",select  = c("isoform", "structural_category","subcategory")) %>% rename_with(.cols = c(2,3), ~glue::glue("RefSeq{.}"))
+classmerge <- mergedpcstr.nofus_NOCAP_enssqanti_class_stcat %>% merge(mergedpcstr2.nofus_NOCAP_gencodesqanti_class_stcat, by = "isoform", all.x = TRUE) %>% merge(mergedpcstr2.nofus_NOCAP_RefSeqsqanti_class_stcat, by = "isoform", all.x = TRUE)
+97240
+classmergefsm <- classmerge%>%subset(Ensstructural_category == "full-splice_match" | gencodstructural_category == "full-splice_match" |  RefSeqstructural_category == "full-splice_match") 
+classmergeism <- classmerge %>% setdiff(classmergefsm)%>%subset(Ensstructural_category == "incomplete-splice_match" | gencodstructural_category == "incomplete-splice_match" | RefSeqstructural_category == "incomplete-splice_match") 
+classmergenic <- classmerge %>% setdiff(classmergefsm)%>% setdiff(classmergeism) %>%subset(Ensstructural_category == "novel_in_catalog" | gencodstructural_category == "novel_in_catalog"  | RefSeqstructural_category == "novel_in_catalog")
+classmergennc <- classmerge %>% setdiff(classmergefsm)%>%  setdiff(classmergeism) %>% setdiff(classmergenic) %>%subset(Ensstructural_category == "novel_not_in_catalog" | gencodstructural_category == "novel_not_in_catalog" | RefSeqstructural_category == "novel_not_in_catalog")
+classmergeothers <- classmerge %>% setdiff(classmergefsm)%>%  setdiff(classmergeism) %>% setdiff(classmergenic) %>% setdiff(classmergennc) 
+classmergefsm1 <- classmergefsm %>% subset(select = c("isoform"))%>% mutate(structural_category = "full-splice match")
+classmergenic1 <- classmergenic %>% subset(select = c("isoform")) %>% mutate(structural_category = "novel in catalog")
+classmergennc1 <- classmergennc %>% subset(select = c("isoform")) %>% mutate(structural_category = "novel not in catalog")
+classmergeism1 <- classmergeism %>% subset(select = c("isoform")) %>% mutate(structural_category = "partial splice match")
+classmergeothers1 <- classmergeothers  %>% subset(select = c("isoform")) %>% mutate(structural_category = "others")
+classmergefinal <- rbind(classmergefsm1,classmergenic1) %>% rbind(classmergennc1)%>% rbind(classmergeism1) %>% 
+  rbind(classmergeothers1)
+

@@ -12,7 +12,15 @@ module load apps/R/4.0.0
 singularity exec -B /../MERGED_TRANSCRIPTOME,/../REFERENCE_INPUT /projects/globalscratch/sqanti3_3.0.sif sqanti3_qc.py \
 /../MERGED_TRANSCRIPTOME/LRS_SRS.gtf /../REFERENCE_INPUT/Mus_musculus.GRCm38.101.gtf /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa \
 --cage_peak /../REFERENCE_INPUT/1refTSS_v3.3_mouse_coordinate.mm10.bed --polyA_motif_list  /../REFERENCE_INPUT/PolyA_motif_List_mm10.txt  \
---gtf -o /../MERGED_TRANSCRIPTOME/LRS_SRS  --isoAnnotLite --gff3 /../REFERENCE_INPUT/Mus_musculus_GRCm38_Ensembl_86.gff3 
+--gtf -o /../MERGED_TRANSCRIPTOME/LRS_SRS  --isoAnnotLite --gff3 /../REFERENCE_INPUT/Mus_musculus_GRCm38_Ensembl_86.gff3 -c /../MERGED_TRANSCRIPTOME/L356_lrs_srs_sj.out.tab,\
+/../MERGED_TRANSCRIPTOME/L223_lrs_srs_sj.out.tab,\
+/../MERGED_TRANSCRIPTOME/L394_lrs_srs_sj.out.tab,\
+/../MERGED_TRANSCRIPTOME/L357_lrs_srs_sj.out.tab,\
+/../MERGED_TRANSCRIPTOME/L224_lrs_srs_sj.out.tab,\
+/../MERGED_TRANSCRIPTOME/L395_lrs_srs_sj.out.tab,\
+/../MERGED_TRANSCRIPTOME/L355_lrs_srs_sj.out.tab,\
+/../MERGED_TRANSCRIPTOME/L222_lrs_srs_sj.out.tab,\
+/../MERGED_TRANSCRIPTOME/L393_lrs_srs_sj.out.tab
 
 #classification with refseq and gencode
 singularity exec -B /../MERGED_TRANSCRIPTOME,/../REFERENCE_INPUT /projects/globalscratch/sqanti3_3.0.sif sqanti3_qc.py  /../MERGED_TRANSCRIPTOME/LRS_SRS.gtf /../REFERENCE_INPUT/mm10.ncbiRefSeq2.gtf /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa   --gtf -o LRS_SRS_refseq --skipORF --skip_report

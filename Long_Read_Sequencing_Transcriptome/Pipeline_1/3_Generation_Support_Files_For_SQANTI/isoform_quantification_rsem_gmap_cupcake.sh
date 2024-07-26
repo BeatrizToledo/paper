@@ -7,7 +7,7 @@
 module load apps/rsem/1.3.3
 
 #prepare the reference
-rsem-prepare-reference --num-threads 40 --gtf /../CUPCAKE/highquality_gmap_sort_cup.collapsed.filtered.gff --star /../CUPCAKE/Mus_musculus.GRCm38.dna.primary_assembly.fa /../SQANTI_INPUT_GMAP_CUPCAKE/gc.rsemstar
+rsem-prepare-reference --num-threads 40 --gtf /../CUPCAKE/highquality_gmap_sort_cup.collapsed.filtered.gff --star /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa /../SQANTI_INPUT_GMAP_CUPCAKE/gc.rsemstar
 
 #calculate isoform expression from short-reads data from the same cell types as for the long-read sequencing,using rsem. Calculate expression for each replicate separately
 

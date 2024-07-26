@@ -11,10 +11,10 @@ python /../tama/tama_go/format_converter/tama_format_gtf_to_bed12_stringtie.py  
 
 #merge transcriptome using tama_merge
 # give priority to stringtie for the exon boundaries
-python /../tama/tama_merge.py -f /../mergelist_lrs_srs.txt -p /../MERGED_TRANSCRIPTOME/lrs_srs_merged -a 25 -m 10 -z 10 -d merge_dup
+python /../tama/tama_merge.py -f /../mergelist_lrs_srs.txt -p /../MERGED_TRANSCRIPTOME/LRS_SRS_merged -a 25 -m 10 -z 10 -d merge_dup
 
 #convert .bed files into .gtf files
-python /../tama/tama_go/format_converter/tama_convert_bed_gtf_ensembl_no_cds.py /../MERGED_TRANSCRIPTOME/lrs_srs_merged.bed /../MERGED_TRANSCRIPTOME/lrs_srs_merged.gtf
+python /../tama/tama_go/format_converter/tama_convert_bed_gtf_ensembl_no_cds.py /../MERGED_TRANSCRIPTOME/LRS_SRS_merged.bed /../MERGED_TRANSCRIPTOME/LRS_SRS_merged.gtf
 
 #run R script to modify .gtf to be compatible with other other tools, such as SQANTI
 Rscript /../MERGED_TRANSCRIPTOME/modify_lrs_srs_merged_gtf.r

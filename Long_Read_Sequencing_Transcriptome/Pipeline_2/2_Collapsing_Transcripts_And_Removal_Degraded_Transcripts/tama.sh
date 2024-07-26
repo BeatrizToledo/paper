@@ -18,8 +18,8 @@ mkdir TAMA
 
 #collapsing of redundant transcripts. tama_collapse.py command generates multiple files, including .bed file.
 #samples were not capped, still generate file with -x capped and -x no_cap to evaluate the degration level. 
-python /../tama/tama_collapse.py -s /../DESALT/highquality_desalt_sorted.sam -f Mus_musculus.GRCm38.dna.primary_assembly.fa -p  /../TAMA/highquality_desalt_sorted_tama.collapsed_capped -x capped 
-python /../tama/tama_collapse.py -s /../DESALT/highquality_desalt_sorted.sam -f Mus_musculus.GRCm38.dna.primary_assembly.fa -p  /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap -x no_cap
+python /../tama/tama_collapse.py -s /../DESALT/highquality_desalt_sorted.sam -f /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa -p  /../TAMA/highquality_desalt_sorted_tama.collapsed_capped -x capped 
+python /../tama/tama_collapse.py -s /../DESALT/highquality_desalt_sorted.sam -f /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa -p  /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap -x no_cap
 
 #calculate the degradation signature with .bed files generated from tama_collapse.py command
 python /../tama/tama_go/file_stats/tama_degradation_signature.py -c /../TAMA/highquality_desalt_sorted_tama.collapsed_capped.bed -nc /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.bed  -o /../TAMA/highquality_desalt_tama_collapsed_DegSig

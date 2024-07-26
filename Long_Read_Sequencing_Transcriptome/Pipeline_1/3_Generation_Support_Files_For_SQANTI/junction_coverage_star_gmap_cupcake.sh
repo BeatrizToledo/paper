@@ -7,7 +7,7 @@
 module load apps/STAR/2.7.3a
 
 #generate index from gmap+cupcake gtf file
-STAR --runThreadN 65 --runMode genomeGenerate --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --genomeFastaFiles /../CUPCAKE/Mus_musculus.GRCm38.dna.primary_assembly.fa --sjdbGTFfile /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed.filtered.gff --sjdbOverhang 99
+STAR --runThreadN 65 --runMode genomeGenerate --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --genomeFastaFiles /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa --sjdbGTFfile /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed.filtered.gff --sjdbOverhang 99
 
 #calculate junction coverage for each cell type from short-read sequencing data using STAR. Calculate expression for each replicate separately
 

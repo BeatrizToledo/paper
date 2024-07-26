@@ -20,5 +20,5 @@ python /../tama/tama_merge.py -f /../MERGED_TRANSCRIPTOME/mergelist_lrs_1_2.txt 
 #convert .bed files into .gtf files
 python /../tama/tama_go/format_converter/tama_convert_bed_gtf_ensembl_no_cds.py /../MERGED_TRANSCRIPTOME/LRS_merged.bed /../MERGED_TRANSCRIPTOME/LRS_merged.gtf
 
-#run R script to modify .gtf to be compatible with other other tools, such as SQANTI
+#run R script to modify .gtf to be compatible with other other tools, such as SQANTI - output LRS.gtf
 Rscript /../MERGED_TRANSCRIPTOME/modify_lrs_merged_gtf.r

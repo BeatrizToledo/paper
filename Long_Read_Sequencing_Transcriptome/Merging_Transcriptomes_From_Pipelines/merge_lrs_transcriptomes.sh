@@ -18,7 +18,7 @@ python /../tama/tama_go/format_converter/tama_format_gff_to_bed12_cupcake.py  /.
 python /../tama/tama_merge.py -f /../MERGED_TRANSCRIPTOME/mergelist_lrs_1_2.txt -p /../MERGED_TRANSCRIPTOME/LRS_merged -a 25 -m 10 -z 10 -d merge_dup
 
 #convert .bed files into .gtf files
-python /..tama/tama_go/format_converter/tama_convert_bed_gtf_ensembl_no_cds.py /../MERGED_TRANSCRIPTOME/LRS_merged.bed /../MERGED_TRANSCRIPTOME/LRS_merged.gtf
+python /../tama/tama_go/format_converter/tama_convert_bed_gtf_ensembl_no_cds.py /../MERGED_TRANSCRIPTOME/LRS_merged.bed /../MERGED_TRANSCRIPTOME/LRS_merged.gtf
 
 #run R script to modify .gtf to be compatible with other other tools, such as SQANTI
 Rscript /../MERGED_TRANSCRIPTOME/modify_lrs_merged_gtf.r

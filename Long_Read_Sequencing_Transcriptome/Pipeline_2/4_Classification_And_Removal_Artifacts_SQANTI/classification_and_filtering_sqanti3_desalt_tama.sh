@@ -9,13 +9,13 @@
 module load apps/singularity/3.7.1
 
 #classify transcripts
-singularity exec -B /../SQANTI3_DESALT_TAMA,/../TAMA,/../SQANTI_INPUT_DESALT_TAMA \
+singularity exec -B /../SQANTI3_DESALT_TAMA,/../TAMA,/../SQANTI_INPUT_DESALT_TAMA,/../REFERENCE_INPUT \
     /projects/globalscratch/sqanti3_3.0.sif \
     sqanti3_qc.py /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered.modified.gtf \
-    /../SQANTI_INPUT_DESALT_TAMA/Mus_musculus.GRCm38.101.gtf \
-    /../SQANTI_INPUT_DESALT_TAMA/Mus_musculus.GRCm38.dna.primary_assembly.fa \
-    --cage_peak /../SQANTI_INPUT_DESALT_TAMA/refTSS_v3.3_mouse_coordinate.mm10.bed \
-    --polyA_motif_list /../SQANTI_INPUT_DESALT_TAMA/PolyA_motif_List_mm10.txt \ 
+    /../REFERENCE_INPUT/Mus_musculus.GRCm38.101.gtf \
+    /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa \
+    --cage_peak /../REFERENCE_INPUT/refTSS_v3.3_mouse_coordinate.mm10.bed \
+    --polyA_motif_list /../REFERENCE_INPUT/PolyA_motif_List_mm10.txt \ 
     --gtf \
     -e /../SQANTI_INPUT_DESALT_TAMA/dt.rsemstar_L393.isoforms.results,\
 /../SQANTI_INPUT_DESALT_TAMA/dt.rsemstar_L355.isoforms.results,\
@@ -27,7 +27,7 @@ singularity exec -B /../SQANTI3_DESALT_TAMA,/../TAMA,/../SQANTI_INPUT_DESALT_TAM
 /../SQANTI_INPUT_DESALT_TAMA/dt.rsemstar_L356.isoforms.results,\
 /../SQANTI_INPUT_DESALT_TAMA/dt.rsemstar_L223.isoforms.results \
     -fl /../SQANTI_INPUT_DESALT_TAMA/highquality_desalt_sorted_tama.collapsed_nocap.filtered_full-length_count.txt -o /../SQANTI_DESALT_TAMA/LRS_2 \
-    --isoAnnotLite --gff3 /../SQANTI_INPUT_DESALT_TAMA/Mus_musculus_GRCm38_Ensembl_86.gff3 \
+    --isoAnnotLite --gff3 /../REFERENCE_INPUT/Mus_musculus_GRCm38_Ensembl_86.gff3 \
     -c /../SQANTI_INPUT_DESALT_TAMA/L356_dt_sj.out.tab,/../SQANTI_INPUT_DESALT_TAMA/L223_dt_sj.out.tab,\
 /../SQANTI_INPUT_DESALT_TAMA/L394_dt_sj.out.tab,/../SQANTI_INPUT_DESALT_TAMA/L357_dt_sj.out.tab,\
 /../SQANTI_INPUT_DESALT_TAMA/L224_dt_sj.out.tab,/../SQANTI_INPUT_DESALT_TAMA/L395_dt_sj.out.tab,\

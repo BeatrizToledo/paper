@@ -1,2 +1,0 @@
-/../ASSEMBLY/SRS.bed	no_cap	2,1,2	SRS
-/../MERGED_TRANSCRIPTOME/LRS_merged.bed  no_cap  1,2,1 LRS

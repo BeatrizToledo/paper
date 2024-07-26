@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #script to merge the transcriptome obtained from pipeline_1 (LRS_1_classification.filtered_lite.gtf) and pipeline_2 (LRS_2_classification.filtered_lite.gtf)
-#mergelistlrs.txt contains name of transcriptome files, if samples were capped, their merging priority and the source name
+#mergelist_lrs_1_2.txt contains name of transcriptome files, if samples were capped, their merging priority and the source name
 
 #load modules
 module load apps/python/2.7.0

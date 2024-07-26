@@ -9,13 +9,13 @@
 module load apps/singularity/3.7.1
 
 #classify transcripts. command generates multiple files.
-singularity exec -B /../SQANTI_GMAP_CUPCAKE,/../CUPCAKE,/../SQANTI_INPUT_GMAP_CUPCAKE \
+singularity exec -B /../SQANTI_GMAP_CUPCAKE,/../CUPCAKE,/../SQANTI_INPUT_GMAP_CUPCAKE,/../REFERENCE_INPUT/ \
     /projects/globalscratch/sqanti3_3.0.sif \
     sqanti3_qc.py /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed.filtered.gff \
-    /../SQANTI_INPUT_GMAP_CUPCAKE/Mus_musculus.GRCm38.101.gtf \
-    /../SQANTI_INPUT_GMAP_CUPCAKE/Mus_musculus.GRCm38.dna.primary_assembly.fa \
-    --cage_peak /../SQANTI_INPUT_GMAP_CUPCAKE/1refTSS_v3.3_mouse_coordinate.mm10.bed \
-    --polyA_motif_list /../SQANTI_INPUT_GMAP_CUPCAKE/PolyA_motif.txt \
+    /../REFERENCE_INPUT/Mus_musculus.GRCm38.101.gtf \
+    /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa \
+    --cage_peak /../REFERENCE_INPUT/1refTSS_v3.3_mouse_coordinate.mm10.bed \
+    --polyA_motif_list /../REFERENCE_INPUT/PolyA_motif.txt \
     --gtf \
     -e /../SQANTI_INPUT_GMAP_CUPCAKE/gc.rsemstar_L393.isoforms.results,\
 /../SQANTI_INPUT_GMAP_CUPCAKE/gc.rsemstar_L355.isoforms.results,\
@@ -29,7 +29,7 @@ singularity exec -B /../SQANTI_GMAP_CUPCAKE,/../CUPCAKE,/../SQANTI_INPUT_GMAP_CU
     -fl /../SQANTI_INPUT_GMAP_CUPCAKE/highquality_gmap_sorted_cupcake.collapsed_full-length_count.txt \
     -o /../SQANTI_GMAP_CUPCAKE/LRS_1 \ 
     --isoAnnotLite \
-    --gff3 /../SQANTI_INPUT_GMAP_CUPCAKE/Mus_musculus_GRCm38_Ensembl_86.gff3 \
+    --gff3 /../REFERENCE_INPUT/Mus_musculus_GRCm38_Ensembl_86.gff3 \
     -c /../SQANTI_INPUT_GMAP_CUPCAKE/L356_gc_sj.out.tab,\
 /../SQANTI_INPUT_GMAP_CUPCAKE/L223_gc_sj.out.tab,\
 /../SQANTI_INPUT_GMAP_CUPCAKE/L394_gc_sj.out.tab,\

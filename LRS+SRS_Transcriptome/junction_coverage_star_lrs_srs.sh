@@ -1,13 +1,13 @@
 #!/bin/bash
 
 #script for generating junction coverage files for SQANTI3
-#use with the collapsed and filtered file highquality_gmap_sorted_cupcake.collapsed.filtered.gff from step 2 
+#use with the LRS_SRS.gtf file
 
 #load modules
 module load apps/STAR/2.7.3a
 
-#generate index from gmap+cupcake gtf file
-STAR --runThreadN 65 --runMode genomeGenerate --genomeDir /../MERGED_TRANSCRIPTOME/ --genomeFastaFiles /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa --sjdbGTFfile /../MERGED_TRANSCRIPTOME/LRS_SRS.filtered.gtf --sjdbOverhang 99
+#generate index from LRS_SRS gtf file
+STAR --runThreadN 65 --runMode genomeGenerate --genomeDir /../MERGED_TRANSCRIPTOME/ --genomeFastaFiles /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa --sjdbGTFfile /../MERGED_TRANSCRIPTOME/LRS_SRS.gtf --sjdbOverhang 99
 
 #calculate junction coverage for each cell type from short-read sequencing data using STAR. Calculate expression for each replicate separately
 

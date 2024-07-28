@@ -36,7 +36,7 @@ LRS_SRS_junctions_coverage <- LRS_SRS_junctions %>% subset(select = c("isoform",
 LRS_SRS_junctions_coverage1 <- LRS_SRS_junctions_coverage %>%mutate(genomic_start_coord = genomic_start_coord-1) %>%   mutate(genomic_end_coord = genomic_end_coord+1)
 
 #list of isoforms with at least 1 splice junction with less than 4 reads
-LRS_SRS_junctions_coverage_lessthan4 <- jLRS_SRS_junctions_coverage1 %>% subset(total_coverage_unique <= 3) %>% subset(select = c("isoform")) %>% distinct()
+LRS_SRS_junctions_coverage_lessthan4 <- LRS_SRS_junctions_coverage1 %>% subset(total_coverage_unique <= 3) %>% subset(select = c("isoform")) %>% distinct()
 
 #list of isoforms with all splice junction with at least 4 reads
 LRS_SRS_alljncmorethan3 <- anti_join(LRS_SRS_junctions_coverage1,LRS_SRS_junctions_coverage_lessthan4)
@@ -46,21 +46,120 @@ LRS_SRS_gtf <- read.delim("/../MERGED_TRANSCRIPTOME/LRS_SRS_nofusion.gtf", heade
 LRS_SRS_gtf_alljncmorethan3 <- LRS_SRS_gtf %>% separate(V9, into = c("V10", "V11", "V12"), sep = "; ", remove = FALSE) %>% mutate (V10 = gsub('transcript_id ', '', V10)) %>% mutate (V10 = gsub('"', '', V10)) %>%
   keeping.order(merge, y=transcriptsalljncmorethan3, by.x = "V10", by.y = "isoform") 
 
-#List with nodes
-NSC.NP.down <- read.delim("/../WHIPPET_RESULTS/NSC.NP.down.merged.txt", header=FALSE,  quote="'")
-NP.N.down <- read.delim("/../WHIPPET_RESULTS/NP.N.down.merged.txt", header=FALSE,  quote="'")
-NP.N.up <- read.delim("/../WHIPPET_RESULTS/NP.N.up.merged.txt", header=FALSE,  quote="'")
-NSC.NP.up <- read.delim("/../WHIPPET_RESULTS/NSC.NP.up.merged.txt", header=FALSE,  quote="'")
+#list with AS coordinates
+NSC.NP.down <- read.delim("/../WHIPPET_RESULTS/NSC.NP.down.txt", header=FALSE,  quote="'")
+NP.N.down <- read.delim("/../WHIPPET_RESULTS/NP.N.down.txt", header=FALSE,  quote="'")
+NP.N.up <- read.delim("/../WHIPPET_RESULTS/NP.N.up.txt", header=FALSE,  quote="'")
+NSC.NP.up <- read.delim("/../WHIPPET_RESULTS/NSC.NP.up.txt", header=FALSE,  quote="'")
 
-NODES <- rbind(PP.DP.down.merged,DP.N.down.merged) %>% rbind(DP.N.up.merged) %>% rbind(PP.DP.up.merged) %>% distinct() %>%
+#list with all AS coordinates
+NODES <- rbind(NSC.NP.down,NP.N.down) %>% rbind(NSC.NP.up) %>% rbind(NSC.NP.up) %>% distinct() %>%
   separate(Coord, into=c("Chr","Coord"), sep=":") %>% separate(Coord, into=c("Start","End"), sep="-")
 
-#CE
-whipCEnotmerged <- NODES %>% merge(mergedpcstr.nofus_NOCAP_sqanti_correctedjncmorethan3,by.x = c("Start", "End", "Strand", "Chr"), by.y = c("V4", "V5", "V7","V1"))%>% subset(select = -c (V2, V3, V6, V8))
-whipCEnotmergedname <- whipCEnotmerged%>%subset(select = c("name"))
-all.notmerged.simplenamecheck <- NODES %>% subset(select = c("name")) %>% anti_join(whipCEnotmergedname) %>% merge(NODES, by.y="name")
-#Maybe these are in a database
-all.notmerged.simplenamecheck[grep('CE', all.notmerged.simplenamecheck$Type), ]
+#Check which AS events have Start and End coordinates that match with both Start and End coordinate of an exon
+as_start_end <- NODES %>% merge(LRS_SRS_transcript_alljncmorethan3,by.x = c("Start", "End", "Strand", "Chr"), by.y = c("V4", "V5", "V7","V1"))%>% subset(select = -c (V2, V3, V6, V8))
+as_start_end_name <- as_start_end %>%subset(select = c("name"))
+as_not_start_end <- NODES %>% subset(select = c("name")) %>% anti_join(as_start_end_name) %>% merge(NODES, by.y="name")
+
+#Check which of the remaining AS events have Start or End coordinates that match with either Start or End coordinate of an exon
+as_start <- as_not_start_end %>% merge(LRS_SRS_transcript_alljncmorethan3,by.x = c("Start", "Strand", "Chr"), by.y = c("V4", "V7","V1")) %>% subset(select = -c (V5, V2, V3, V6, V8)) 
+as_end <- as_not_start_end %>% merge(LRS_SRS_transcript_alljncmorethan3,by.x = c("End", "Strand", "Chr"), by.y = c("V5", "V7","V1"))%>% subset(select = -c (V4, V2, V3, V6, V8)) 
+as_start_name <- as_start %>%subset(select = c("name")) %>%distinct() 
+as_end_name <-as_end%>%subset(select = c("name"))%>% distinct()
+as_not_start_and_or_end <-  NODES %>% subset(select = c("name")) %>% setdiff(as_start_end_name) %>% setdiff(as_start_name) %>% setdiff(as_end_name) %>% merge(NODES, by="name")
+
+#check which of the remaining AS events coordinates overlaps an exon
+#prepare file for bedtools
+as_not_start_and_or_end1 <- as_not_start_and_or_end %>% mutate(Zero = 0) %>% subset(select =c("Chr", "Start", "End", "name", "Zero","Strand")) %>%  mutate(Chr=gsub('^', 'chr', Chr))
+write.table(as_not_start_and_or_end1, "/../_______/as_not_start_and_or_end_coord.txt", sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)  
+
+LRS_SRS_alljncmorethan3_coord <- LRS_SRS_gtf_alljncmorethan3 %>% separate(V9, into = c("V10", "V11", "V12"), sep = "; ", remove = FALSE) %>% mutate (V10 = gsub('transcript_id ', '', V10)) %>% mutate (V10 = gsub('"', '', V10)) %>% distinct() %>%
+  separate(V9, into = c("a", "b", "c"), sep = ";"  ) %>% unite(V9, c("b", "a", "c"), sep = "; ") %>%  mutate(Chr=gsub('^', 'chr', V1))%>% mutate(Zero = 0) %>%
+  subset(V3=="exon", select = c("Chr", "V4", "V5", "V9", "Zero", "V7"))
+write.table(LRS_SRS_alljncmorethan3_coord, "/../_______/LRS_SRS_alljncmorethan3_coord.txt", sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)  
+
+#on shell do bedtools intersect -a LRS_SRS_alljncmorethan3_coord.txt -b as_not_start_and_or_end_coord.txt -wo -s -F 0.99 -filenames > as_overlap.txt
+system("/../__/custom_script.sh")
+
+as_overlap <- read.delim("/../WHIPPET_RESULTS/as_overlap.txt", header=FALSE,  quote="'")
+as_overlap_name <- as_overlap %>%subset(select = c("V10")) %>% dplyr::rename(name=V10)
+as_overlap <- as_overlap %>% subset(select = c("V1", "V4","V6", "V8", "V9", "V10")) %>% mutate(V1 = gsub("chr", "", V1)) %>% setnames( old = c("V1", "V4", "V6", "V8", "V9", "V10"), new = c('Chr','V9', "Strand", "Start", "End", "name"))
+
+EVENTS <- whipCEnotmerged%>% rbind(whipAAADnotmerged) %>%rbind(whipAAAD1notmerged) %>%subset( select= c('Chr','V9', "Strand", "Start", "End", "name")) %>%rbind(notmergedoverlatirwhip1) %>% distinct() %>% mutate (V9 = gsub('"', '', V9))
+NODES %>% subset(select= c("name")) %>% distinct() %>%nrow()
+EVENTSname <- EVENTS %>% subset(select= c("name")) %>% distinct()
+#total 2682, 68 missing
+
+#AS events that did not overlap 
+as_not_overlap <-  NODES %>% subset(select = c("name")) %>% distinct()%>% setdiff(as_start_end_name) %>% setdiff(as_start_name) %>% setdiff(as_end_name) %>%setdiff(as_overlap_name) %>%merge(NODES, by="name") 
+
+#the check if coordinate of the remaining AS events match coord from annotated transcripts
+
+all.ensCE <- ensembl_SJsqanti_correctedjncmorethan3 %>% subset(V3 == "exon") %>% merge(all.notmerged.simplenamecheck4, by.x = c("V4","V5"), by.y = c("Start", "End")) %>%subset(select = c("V1", "V4","V5" ,"V7", "V9", "name"))
+#PB.9743-19, PB.9582-18,PB.9316-9, PB.8772-6,PB.2280-4,  PB.12316-82, PB.4866-14 - all ens
+all.ensstart <- ensembl_SJsqanti_correctedjncmorethan3 %>% subset(V3 == "exon") %>% merge(all.notmerged.simplenamecheck4, by.x = c("V4"), by.y = c("Start"))  %>% anti_join(all.ensCE) %>% subset(select = c("V1", "V4","End" ,"V7", "V9", "name")) %>% dplyr::rename(V5=End)
+#PB.6167-3, PB.5031-60, PB.4800-6, PB.4866-7, PB.2781-9, PB.8482-32 - all ens
+all.ensend <- ensembl_SJsqanti_correctedjncmorethan3 %>% subset(V3 == "exon") %>% merge(all.notmerged.simplenamecheck4, by.x = c("V5"), by.y = c("End"))  %>% anti_join(all.ensCE)%>% subset(select = c("V1", "Start","V5" ,"V7", "V9", "name")) %>% dplyr::rename(V4=Start)
+#PB.10632-10, PB.2400-2, PB.10531-13 
+all.ensend1<- all.ensend[-grep('PB.4732-34', all.ensend$name), ]
+
+all.gencCE <- gencode_SJsqanti_correctedjncmorethan3 %>% subset(V3 == "exon") %>% merge(all.notmerged.simplenamecheck4, by.x = c("V4","V5"), by.y = c("Start", "End")) %>%subset(select = c("V1", "V4","V5" ,"V7", "V9", "name"))
+all.gencstart <- gencode_SJsqanti_correctedjncmorethan3 %>% subset(V3 == "exon") %>% merge(all.notmerged.simplenamecheck4, by.x = c("V4"), by.y = c("Start"))  %>% anti_join(all.ensCE) %>% subset(select = c("V1", "V4","End" ,"V7", "V9", "name")) %>% dplyr::rename(V5=End)
+all.gencend <- gencode_SJsqanti_correctedjncmorethan3 %>% subset(V3 == "exon") %>% merge(all.notmerged.simplenamecheck4, by.x = c("V5"), by.y = c("End"))  %>% anti_join(all.ensCE)%>% subset(select = c("V1", "Start","V5" ,"V7", "V9", "name")) %>% dplyr::rename(V4=Start)
+
+all.RefSeqCE <- ncbiRefSeq2_SJsqanti_correctedjncmorethan3 %>% subset(V3 == "exon") %>% merge(all.notmerged.simplenamecheck4, by.x = c("V4","V5"), by.y = c("Start", "End")) %>%subset(select = c("V1", "V4","V5" ,"V7", "V9", "name"))
+all.RefSeqCE1<- all.RefSeqCE[grep('PB.4732-34|PB.1991-12', all.RefSeqCE$name), ]
+#PB.4732-34,PB.1991-12
+all.RefSeqstart <- ncbiRefSeq2_SJsqanti_correctedjncmorethan3 %>% subset(V3 == "exon") %>% merge(all.notmerged.simplenamecheck4, by.x = c("V4"), by.y = c("Start"))  %>% anti_join(all.ensCE) %>% subset(select = c("V1", "V4","End" ,"V7", "V9", "name")) %>% dplyr::rename(V5=End)
+all.RefSeqstart1<- all.RefSeqstart[grep('PB.4052-20|PB.5326-30|PB.12524-23|PB.3724-21|PB.311-28|PB.1400-48|PB.449-3', all.RefSeqstart$name), ]
+PB.4052-20|PB.5326-30|PB.12524-23|PB.3724-21|PB.311-28|PB.1400-48|PB.449-3
+all.RefSeqend <- ncbiRefSeq2_SJsqanti_correctedjncmorethan3 %>% subset(V3 == "exon") %>% merge(all.notmerged.simplenamecheck4, by.x = c("V5"), by.y = c("End"))  %>% anti_join(all.ensCE)%>% subset(select = c("V1", "Start","V5" ,"V7", "V9", "name")) %>% dplyr::rename(V4=Start)
+PB.10942-29|PB.8463-5|PB.10400-12
+all.RefSeqend1<- all.RefSeqend[grep('PB.10942-29|PB.8463-5|PB.10400-12', all.RefSeqend$name), ]
+
+exonsensembl_SJsqanti_correctedjncmorethan3<- ensembl_SJsqanti_correctedjncmorethan3 %>% subset(V3 == "exon") %>%  mutate(Chr=gsub('^', 'chr', V1))%>% mutate(Zero = 0) %>% subset(V3=="exon", select = c("Chr", "V4", "V5", "V9", "Zero", "V7"))
+write.table(exonsensembl_SJsqanti_correctedjncmorethan3, "/Beatriz_Toledo/nocapMerge/exonscoordinatesensembl.txt", sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)  
+exonsgencode_SJsqanti_correctedjncmorethan3<- gencode_SJsqanti_correctedjncmorethan3 %>% subset(V3 == "exon") %>%  mutate(Chr=gsub('^', 'chr', V1))%>% mutate(Zero = 0) %>% subset(V3=="exon", select = c("Chr", "V4", "V5", "V9", "Zero", "V7"))
+write.table(exonsgencode_SJsqanti_correctedjncmorethan3, "/Beatriz_Toledo/nocapMerge/exonscoordinatesgenc.txt", sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)  
+exonsncbiRefSeq2_SJsqanti_correctedjncmorethan3<- ncbiRefSeq2_SJsqanti_correctedjncmorethan3 %>% subset(V3 == "exon") %>%  mutate(Chr=gsub('^', 'chr', V1))%>% mutate(Zero = 0) %>% subset(V3=="exon", select = c("Chr", "V4", "V5", "V9", "Zero", "V7"))
+write.table(exonsncbiRefSeq2_SJsqanti_correctedjncmorethan3, "/Beatriz_Toledo/nocapMerge/exonscoordinatesrefseq.txt", sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)  
+
+#bedtools intersect -a exonscoordinatesensembl.txt -b NODES2022.merged.eventstocheckIR.txt -wo -s -F 0.99 -filenames > NODES2022.merged.overlatirensemblFilteredincluded.txt
+#bedtools intersect -a exonscoordinatesgenc.txt -b NODES2022.merged.eventstocheckIR.txt -wo -s -F 0.99 -filenames > NODES2022.merged.overlatirgencFilteredincluded.txt
+#bedtools intersect -a exonscoordinatesrefseq.txt -b NODES2022.merged.eventstocheckIR.txt -wo -s -F 0.99 -filenames > NODES2022.merged.overlatirrefseqFilteredincluded.txt
+notmergedoverlatirensembl <- read.delim("/Beatriz_Toledo/nocapMerge/NODES2022.merged.overlatirensemblFilteredincluded.txt", header=FALSE)
+notmergedoverlatirgenc <- read.delim("/Beatriz_Toledo/nocapMerge/NODES2022.merged.overlatirgencFilteredincluded.txt", header=FALSE)
+notmergedoverlatirrefseq <- read.delim("/Beatriz_Toledo/nocapMerge/NODES2022.merged.overlatirrefseqFilteredincluded.txt", header=FALSE)
+genctocheck <- merge(all.notmerged.simplenamecheck4, notmergedoverlatirgenc, by.x = "name", by.y = "V10") 
+reftocheck <- merge(all.notmerged.simplenamecheck4, notmergedoverlatirrefseq, by.x = "name", by.y = "V10")
+reftocheck1<- reftocheck[grep('PB.11846-27|PB.4956-74', reftocheck$name), ] %>% subset(select = c("V1", "Start", "End", "Strand", "V4", "name"))
+#PB.11846-27|PB.4956-74
+enstocheck <- merge(all.notmerged.simplenamecheck4, notmergedoverlatirensembl, by.x = "name", by.y = "V10") 
+#PB.13554-20|PB.13554-21,22|PB.1837-3|PB.2933-14|PB.2952-10|PB.4067-54|PB.9574-12
+enstocheck1<- enstocheck[grep('PB.13554-20|PB.13554-21,22|PB.1837-3|PB.2933-14|PB.2952-10|PB.4067-54|PB.9574-12', enstocheck$name), ]%>% subset(select = c("V1", "Start", "End", "Strand", "V4", "name"))
+ANOThave <- rbind(all.ensCE,all.ensstart) %>% rbind(all.ensend1) %>% rbind(all.RefSeqCE1) %>% rbind(all.RefSeqstart1) %>% rbind(all.RefSeqend1)  %>% subset(select =c('name'))
+ANOThave1 <- rbind(reftocheck1) %>% rbind(enstocheck1) %>% subset(select =c('name'))
+ANOThave2 <- rbind(all.ensCE,all.ensstart) %>% rbind(all.ensend1) %>% rbind(all.RefSeqCE1) %>% rbind(all.RefSeqstart1) %>% rbind(all.RefSeqend1)  
+ANOThave3 <- rbind(reftocheck1) %>% rbind(enstocheck1) 
+TOCHECK <-anti_join(all.notmerged.simplenamecheck4, ANOThave ) %>% anti_join( ANOThave1 ) 
+#PB.12450-7, PB.13189-16, PB.235-73 - THESE 3 are in fact new
+#28 not have a corresponding transcript with reasonable sj levels - 31 2682
+cdscoord <- mergedpcstr2.nofus_NOCAP_sqanti_corrected.gtf.cds %>% subset(V3 == "CDS") %>% separate(V9, into = c("V9", "V10"), sep = ";") %>% mutate (V10 = gsub(' transcript_id ', '', V10)) %>% mutate (V10 = gsub('"', '', V10))
+cdscoord1 <- cdscoord %>% dplyr::group_by(V10) %>% mutate(start = min(V4)) %>% mutate(end = max(V5)) %>% subset(select = c("V9", "V10","V7", "start", "end")) %>% distinct()
+cdscoordens <- Ensembl_corrected.gtf.cds %>% subset(V3 == "CDS") %>% separate(V9, into = c("V9", "V10", "V11"), sep = ";") %>% mutate (V10 = gsub(' transcript_id ', '', V10)) %>% mutate (V10 = gsub('"', '', V10))
+cdscoordens1 <- cdscoordens %>% dplyr::group_by(V10) %>% mutate(start = min(V4)) %>% mutate(end = max(V5)) %>% subset(select = c("V9", "V10","V7", "start", "end")) %>% distinct()
+cdscoordref <- mm10.ncbiRefSeq2 %>% subset(V3 == "CDS")  %>% separate(V9, into = c("V10", "V11", "V12"), sep = "; ", remove = FALSE) %>% mutate (V11 = gsub('transcript_id ', '', V11)) %>% mutate (V11 = gsub('"', '', V11)) 
+cdscoordref1 <- cdscoordref %>% dplyr::group_by(V11) %>% mutate(start = min(V4)) %>% mutate(end = max(V5)) %>% subset(select = c("V10", "V11","V7", "start", "end")) %>% distinct() %>% rename(V9 = V10) %>% rename(V10 = V11)
+cdscoordall<- cdscoord1 %>% rbind(cdscoordens1) %>% rbind(cdscoordref1)
+EVENTSx<-EVENTS[grep('; tr', EVENTS$V9), ] %>% separate(V9, into = c("gene", "tr", "x"), sep = ";") %>% mutate (tr = gsub(' transcript_id ', '', tr))
+EVENTSx2<-EVENTS[-grep('; tr', EVENTS$V9), ] %>% separate(V9, into = c("tr", "gene", "x"), sep = ";") %>% mutate (tr = gsub('transcript_id ', '', tr))
+ANOThave2x2<-ANOThave2 %>% separate(V9, into = c("tr", "gene", "x"), sep = ";") %>% mutate (tr = gsub('transcript_id ', '', tr))  %>% setnames( old = c("V1", "V7", "V4", "V5"), new = c("Chr","Strand", "Start", "End"))
+ANOThave3x2<-ANOThave3 %>% separate(V4, into = c("tr", "gene", "x"), sep = ";") %>% mutate (tr = gsub('transcript_id ', '', tr)) %>% mutate(V1 = gsub("chr", "", V1)) %>% setnames( old = c("V1"), new = c('Chr'))
+EVENTSX <- rbind(EVENTSx,EVENTSx2)%>% rbind(ANOThave2x2) %>% rbind(ANOThave3x2)%>% mutate (tr = gsub('"', '', tr))
+EVENTSXnodes <- EVENTSX %>% subset(select =c("name"))%>% distinct()
+NODESTOBEANALYZED <- intersect(nodesisoexcnodes,EVENTSXnodes)
+#2581 NODES FOR NEXT ANALYSES, But have to recheck removing the fusion opnes
+
 
 
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Assembled transcripts might have artefacts or be low quality.
-# Here some clean up to make before proceeding.
+# Here some clean up to make before proceeding with SQANTI analysis.
 
 # Step 1: Compare with mm10 and annotate the genes according to Ensembl
 gffcompare /../assembly/SRS.gtf -r SRS.gtf -R -M -o /../gffcompare/SRS -V

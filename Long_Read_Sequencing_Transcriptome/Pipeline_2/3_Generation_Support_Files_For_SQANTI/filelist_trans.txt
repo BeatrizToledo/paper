@@ -1,1 +1,1 @@
-1  unpolished.cluster_report.csv  cluster
+1  /../LONG_READS_ISOSEQ3/unpolished.cluster_report.csv  cluster

@@ -15,15 +15,6 @@ singularity exec -B /../REFERENCE_INPUT /projects/globalscratch/sqanti3_3.0.sif 
 /../REFERENCE_INPUT/L355_refseq_sj.out.tab,\
 /../REFERENCE_INPUT/L222_refseq_sj.out.tab,\
 /../REFERENCE_INPUT/L393_refseq_sj.out.tab
-singularity exec -B /../REFERENCE_INPUT /projects/globalscratch/sqanti3_3.0.sif sqanti3_qc.py  /../REFERENCE_INPUT/gencode.vM10.primary_assembly.annotation.gtf /../REFERENCE_INPUT/gencode.vM10.primary_assembly.annotation.gtf /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa   --gtf -o /../REFERENCE_INPUT/gencode --skipORF —skip_report  -c /../REFERENCE_INPUT/L356_gencode_sj.out.tab,\
-/../REFERENCE_INPUT/L223_gencode_sj.out.tab,\
-/../REFERENCE_INPUT/L394_gencode_sj.out.tab,\
-/../REFERENCE_INPUT/L357_gencode_sj.out.tab,\
-/../REFERENCE_INPUT/L224_gencode_sj.out.tab,\
-/../REFERENCE_INPUT/L395_gencode_sj.out.tab,\
-/../REFERENCE_INPUT/L355_gencode_sj.out.tab,\
-/../REFERENCE_INPUT/L222_gencode_sj.out.tab,\
-/../REFERENCE_INPUT/L393_gencode_sj.out.tab
 singularity exec -B /../REFERENCE_INPUT /projects/globalscratch/sqanti3_3.0.sif sqanti3_qc.py  /../REFERENCE_INPUT/Mus_musculus.GRCm38.101.gtf /../REFERENCE_INPUT/Mus_musculus.GRCm38.101.gtf /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa   --gtf -o /../REFERENCE_INPUT/ensembl --skipORF —skip_report  -c /../REFERENCE_INPUT/L356_ensembl_sj.out.tab,\
 /../REFERENCE_INPUT/L223_ensembl_sj.out.tab,\
 /../REFERENCE_INPUT/L394_ensembl_sj.out.tab,\

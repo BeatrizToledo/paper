@@ -23,8 +23,8 @@ singularity exec -B /../MERGED_TRANSCRIPTOME,/../REFERENCE_INPUT /projects/globa
 /../MERGED_TRANSCRIPTOME/L393_lrs_srs_sj.out.tab
 
 #classification with refseq and gencode
-singularity exec -B /../MERGED_TRANSCRIPTOME,/../REFERENCE_INPUT /projects/globalscratch/sqanti3_3.0.sif sqanti3_qc.py  /../MERGED_TRANSCRIPTOME/LRS_SRS.gtf /../REFERENCE_INPUT/mm10.ncbiRefSeq2.gtf /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa   --gtf -o LRS_SRS_refseq --skipORF --skip_report
-singularity exec -B /../MERGED_TRANSCRIPTOME,/../REFERENCE_INPUT /projects/globalscratch/sqanti3_3.0.sif sqanti3_qc.py  /../MERGED_TRANSCRIPTOME/LRS_SRS.gtf /../REFERENCE_INPUT/gencode.vM10.primary_assembly.annotation.gtf /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa   --gtf -o LRS_SRS_gencode --skipORF —skip_report
+singularity exec -B /../MERGED_TRANSCRIPTOME,/../REFERENCE_INPUT /projects/globalscratch/sqanti3_3.0.sif sqanti3_qc.py  /../MERGED_TRANSCRIPTOME/LRS_SRS.gtf /../REFERENCE_INPUT/mm10.ncbiRefSeq2.gtf /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa   --gtf -o /../MERGED_TRANSCRIPTOME/LRS_SRS_refseq --skipORF --skip_report
+singularity exec -B /../MERGED_TRANSCRIPTOME,/../REFERENCE_INPUT /projects/globalscratch/sqanti3_3.0.sif sqanti3_qc.py  /../MERGED_TRANSCRIPTOME/LRS_SRS.gtf /../REFERENCE_INPUT/gencode.vM10.primary_assembly.annotation.gtf /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa   --gtf -o /../MERGED_TRANSCRIPTOME/LRS_SRS_gencode --skipORF —skip_report
 
 #remove fusion transcripts from LRS_SRS
 Rscript /../MERGED_TRANSCRIPTOME/classification_transcripts_and_filtering_of_fusion_transcripts.r

@@ -29,17 +29,29 @@ keeping.order <- function(data, fn, ...) {
 }
 
 #filter out low expressed isoforms (less thant 4 reads in at least 1 splice-junction
-jncalllistreadcount <- mergedpcstr2.nofus_NOCAP_SJsqanti_junctions %>% subset(select = c("isoform", "genomic_start_coord", "genomic_end_coord", "chrom", "strand", "total_coverage_unique"))
-jncalllistreadcount1 <- jncalllistreadcount %>%mutate(genomic_start_coord = genomic_start_coord-1) %>%   mutate(genomic_end_coord = genomic_end_coord+1)
-jncalllistreadcountlessthan3 <- jncalllistreadcount1 %>% subset(total_coverage_unique <= 3) %>% subset(select = c("isoform")) %>% distinct()
-jncalllistreadcount1alljncmorethan3 <- anti_join(jncalllistreadcount1,jncalllistreadcountlessthan3)
-inner_join(jncalllistreadcount1alljncmorethan3,jncalllistreadcountlessthan3)
-transcriptsalljncmorethan3 <- jncalllistreadcount1alljncmorethan3  %>% subset(select = c("isoform")) %>% distinct()
 
-mergedpcstr.nofus_NOCAP_sqanti_correctedjncmorethan3 <- mergedpcstr.nofus_NOCAP_sqanti_corrected %>% separate(V9, into = c("V10", "V11", "V12"), sep = "; ", remove = FALSE) %>% mutate (V10 = gsub('transcript_id ', '', V10)) %>% mutate (V10 = gsub('"', '', V10)) %>%
+#table with splice junction coverage information
+LRS_SRS_junctions <- read.delim("/../MERGED_TRANSCRIPTOME/LRS_SRS_nofusion_junctions.txt", header=FALSE,  quote="'")
+LRS_SRS_junctions_coverage <- LRS_SRS_junctions %>% subset(select = c("isoform", "genomic_start_coord", "genomic_end_coord", "chrom", "strand", "total_coverage_unique"))
+LRS_SRS_junctions_coverage1 <- LRS_SRS_junctions_coverage %>%mutate(genomic_start_coord = genomic_start_coord-1) %>%   mutate(genomic_end_coord = genomic_end_coord+1)
+
+#list of isoforms with at least 1 splice junction with less than 4 reads
+LRS_SRS_junctions_coverage_lessthan4 <- jLRS_SRS_junctions_coverage1 %>% subset(total_coverage_unique <= 3) %>% subset(select = c("isoform")) %>% distinct()
+
+#list of isoforms with all splice junction with at least 4 reads
+LRS_SRS_alljncmorethan3 <- anti_join(LRS_SRS_junctions_coverage1,LRS_SRS_junctions_coverage_lessthan4)
+LRS_SRS_transcript_alljncmorethan3 <- LRS_SRS_junctions_coverage_morethan3  %>% subset(select = c("isoform")) %>% distinct()
+
+LRS_SRS_gtf <- read.delim("/../MERGED_TRANSCRIPTOME/LRS_SRS_nofusion.gtf", header=FALSE,  quote="'")
+LRS_SRS_gtf_alljncmorethan3 <- LRS_SRS_gtf %>% separate(V9, into = c("V10", "V11", "V12"), sep = "; ", remove = FALSE) %>% mutate (V10 = gsub('transcript_id ', '', V10)) %>% mutate (V10 = gsub('"', '', V10)) %>%
   keeping.order(merge, y=transcriptsalljncmorethan3, by.x = "V10", by.y = "isoform") 
 
 #List with nodes
+NSC.NP.down <- read.delim("/../WHIPPET_RESULTS/NSC.NP.down.merged.txt", header=FALSE,  quote="'")
+NP.N.down <- read.delim("/../WHIPPET_RESULTS/NP.N.down.merged.txt", header=FALSE,  quote="'")
+NP.N.up <- read.delim("/../WHIPPET_RESULTS/NP.N.up.merged.txt", header=FALSE,  quote="'")
+NSC.NP.up <- read.delim("/../WHIPPET_RESULTS/NSC.NP.up.merged.txt", header=FALSE,  quote="'")
+
 NODES <- rbind(PP.DP.down.merged,DP.N.down.merged) %>% rbind(DP.N.up.merged) %>% rbind(PP.DP.up.merged) %>% distinct() %>%
   separate(Coord, into=c("Chr","Coord"), sep=":") %>% separate(Coord, into=c("Start","End"), sep="-")
 

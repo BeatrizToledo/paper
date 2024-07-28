@@ -1,5 +1,0 @@
-stringtie.mm10.noG10cov.merged.strand.fixed.gtf <- read.delim("/group/crtd_calegari/People/Beatriz_Toledo/nocapMerge/stringtie.mm10.noG10cov.merged.strand.fixed.gtf", header=FALSE,  quote="'")
-bff2nocap<-stringtie.mm10.noG10cov.merged.strand.fixed.gtf %>%
-  mutate(V2=str_replace(stringtie.mm10.noG10cov.merged.strand.fixed.gtf$V2,"PBRI", "PacBio"))%>%
-  mutate(V9=gsub('"MSTRG.', '"PB.', stringtie.mm10.noG10cov.merged.strand.fixed.gtf$V9)) 
-write.table(bff2nocap,"/group/crtd_calegari/People/Beatriz_Toledo/nocapMerge/stringtie.mm10.noG10cov.merged.strand.fixed.modified.gtf", sep="\t", quote= FALSE , row.name=FALSE, col.names = FALSE)

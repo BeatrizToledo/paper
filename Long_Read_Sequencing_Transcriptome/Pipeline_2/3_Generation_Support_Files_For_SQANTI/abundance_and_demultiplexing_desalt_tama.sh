@@ -30,7 +30,7 @@ python /../cDNA_Cupcake/sequence/fa2fq.py /../TAMA/highquality_desalt_sorted_tam
 
 #demultiplexing. mapped_fl_count.txt file contains full-length read counts for each mapped, unique, isoform for each sample
 #flnc.report.csv was obtained during Isoseq3 processing
-python /../cDNA_Cupcake/post_isoseq_cluster/demux_isoseq_with_genome.py --mapped_fafq  /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.fastq --read_stat /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap_read_support_modified.txt --classify_csv /../long_reads_fasta/flnc.report.csv -o /../SQANTI_INPUT_DESALT_TAMA/highquality_desalt_sorted_tama.collapsed_nocap_full-length_count.txt
+python /../cDNA_Cupcake/post_isoseq_cluster/demux_isoseq_with_genome.py --mapped_fafq  /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.fastq --read_stat /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap_read_support_modified.txt --classify_csv /../LONG_READS_ISOSEQ3/flnc.report.csv -o /../SQANTI_INPUT_DESALT_TAMA/highquality_desalt_sorted_tama.collapsed_nocap_full-length_count.txt
 
 #generate demultiplexed GFF and FASTA/FASTQ files 
 python /../cDNA_Cupcake/post_isoseq_cluster/demux_by_barcode_groups.py /../TAMA/highquality_desalt_sorted_tama.collapsed_nocap.gff /../SQANTI_INPUT_DESALT_TAMA/highquality_desalt_sorted_tama.collapsed_nocap_full-length_count.txt /../SQANTI_INPUT_DESALT_TAMA/output_demux_highquality_desalt_sorted_tama.collapsed_nocap "('bc1001_5p--bc1001_3p','NSC'),('bc1002_5p--bc1002_3p','NP'),('bc1003_5p--bc1003_3p','N’)”

@@ -11,7 +11,7 @@ module load apps/singularity/3.7.1
 mkdir CUPCAKE
 
 #collapsing of redundant transcripts. collapse_isoforms_by_sam.py command generates multiple files, including .gff file.
-singularity exec -B /../CUPCAKE,/../long_reads_fasta,/../GMAP /projects/globalscratch/cdna_cupcake.sif collapse_isoforms_by_sam.py --input /../long_reads_fasta/hq_transcripts.fasta  -s  /../GMAP/highquality_gmap_sorted.sam -o  /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed --dun-merge-5-shorter --max_fuzzy_junction=5
+singularity exec -B /../CUPCAKE,/../LONG_READS_FASTA,/../GMAP /projects/globalscratch/cdna_cupcake.sif collapse_isoforms_by_sam.py --input /../LONG_READS_FASTA/hq_transcripts.fasta  -s  /../GMAP/highquality_gmap_sorted.sam -o  /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed --dun-merge-5-shorter --max_fuzzy_junction=5
 
 #filter out degraded transcripts. filter_away_subset.py command generates multiple files, including .gff and .abundance.txt 
 singularity exec -B /../CUPCAKE /projects/globalscratch/cdna_cupcake.sif filter_away_subset.py /../CUPCAKE/highquality_gmap_sorted_cupcake.collapsed

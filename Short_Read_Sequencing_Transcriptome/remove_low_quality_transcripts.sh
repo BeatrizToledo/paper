@@ -4,7 +4,8 @@
 # Here some clean up to make before proceeding with SQANTI analysis.
 
 # compare with mm10 and annotate the genes according to Ensembl
-gffcompare /../ASSEMBLY/SRS.gtf -r SRS.gtf -R -M -o /../GFFCOMPARE/SRS -V
+
+gffcompare /../ASSEMBLY/SRS.gtf -r mm10.filtered.novel.gtf -R -M -o /../GFFCOMPARE/SRS -V
 
 # extract bad class code transcripts with awk from the annotated one
 awk '{if($0~"class_code \"(s|e|x|p)\""){print $0}}' /../GFFCOMPARE/SRS.annotated.gtf > /../GFFCOMPARE/SRS.annotated.bad.tx.gtf

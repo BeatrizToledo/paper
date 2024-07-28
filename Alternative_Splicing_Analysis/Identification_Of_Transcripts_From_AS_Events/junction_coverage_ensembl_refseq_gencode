@@ -25,24 +25,6 @@ STAR --runThreadN 65 --genomeDir /../REFERENCE_INPUT/ --readFilesIn  /../SHORT-R
 STAR --runThreadN 65 --genomeDir /../REFERENCE_INPUT/ --readFilesIn  /../SHORT-READS/L395_R2.fastq  /../SHORT-READS/L395_R1.fastq --outFileNamePrefix /../REFERENCE_INPUT/L395_ensembl --outSAMtype None --twopassMode Basic
 
 #generate index from gencode gtf file
-STAR --runThreadN 65 --runMode genomeGenerate --genomeDir /../REFERENCE_INPUT/ --genomeFastaFiles /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa --sjdbGTFfile /../REFERENCE_INPUT/gencode.vM10.primary_assembly.annotation.gtf --sjdbOverhang 99
-
-#calculate junction coverage for each cell type from short-read sequencing data using STAR. Calculate expression for each replicate separately
-
-#sample1 (NSC)  - 3 replicates
-STAR --runThreadN 65 --genomeDir /../REFERENCE_INPUT/ --readFilesIn  /../SHORT-READS/L222_R1.fastq  /../SHORT-READS/L222_R2.fastq --outFileNamePrefix /../REFERENCE_INPUT/L222_gencode --outSAMtype None --twopassMode Basic
-STAR --runThreadN 65 --genomeDir /../REFERENCE_INPUT/ --readFilesIn  /../SHORT-READS/L355_R1.fastq  /../SHORT-READS/L355_R2.fastq --outFileNamePrefix /../REFERENCE_INPUT/L355_gencode --outSAMtype None --twopassMode Basic
-STAR --runThreadN 65 --genomeDir /../REFERENCE_INPUT/ --readFilesIn  /../SHORT-READS/L393_R1.fastq  /../SHORT-READS/L393_R2.fastq --outFileNamePrefix /../REFERENCE_INPUT/L393_gencode --outSAMtype None --twopassMode Basic
-#sample2 (NP) - 3 replicates
-STAR --runThreadN 65 --genomeDir /../REFERENCE_INPUT/ --readFilesIn  /../SHORT-READS/L223_R2.fastq  /../SHORT-READS/L223_R1.fastq --outFileNamePrefix /../REFERENCE_INPUT/L223_gencode --outSAMtype None --twopassMode Basic
-STAR --runThreadN 65 --genomeDir /../REFERENCE_INPUT/ --readFilesIn  /../SHORT-READS/L356_R2.fastq  /../SHORT-READS/L356_R1.fastq --outFileNamePrefix /../REFERENCE_INPUT/L356_gencode --outSAMtype None --twopassMode Basic
-STAR --runThreadN 65 --genomeDir /../REFERENCE_INPUT/ --readFilesIn  /../SHORT-READS/L394_R2.fastq  /../SHORT-READS/L394_R1.fastq --outFileNamePrefix /../REFERENCE_INPUT/L394_gencode --outSAMtype None --twopassMode Basic
-#sample3 (N) - 3 replicates
-STAR --runThreadN 65 --genomeDir /../REFERENCE_INPUT/ --readFilesIn  /../SHORT-READS/L224_R2.fastq  /../SHORT-READS/L224_R1.fastq --outFileNamePrefix /../REFERENCE_INPUT/L224_gencode --outSAMtype None --twopassMode Basic
-STAR --runThreadN 65 --genomeDir /../REFERENCE_INPUT/ --readFilesIn  /../SHORT-READS/L357_R2.fastq  /../SHORT-READS/L357_R1.fastq --outFileNamePrefix /../REFERENCE_INPUT/L357_gencode --outSAMtype None --twopassMode Basic
-STAR --runThreadN 65 --genomeDir /../REFERENCE_INPUT/ --readFilesIn  /../SHORT-READS/L395_R2.fastq  /../SHORT-READS/L395_R1.fastq --outFileNamePrefix /../REFERENCE_INPUT/L395_gencode --outSAMtype None --twopassMode Basic
-
-#generate index from gencode gtf file
 STAR --runThreadN 65 --runMode genomeGenerate --genomeDir /../REFERENCE_INPUT/ --genomeFastaFiles /../REFERENCE_INPUT/Mus_musculus.GRCm38.dna.primary_assembly.fa --sjdbGTFfile /../REFERENCE_INPUT/mm10.ncbiRefSeq.gtf --sjdbOverhang 99
 
 #calculate junction coverage for each cell type from short-read sequencing data using STAR. Calculate expression for each replicate separately

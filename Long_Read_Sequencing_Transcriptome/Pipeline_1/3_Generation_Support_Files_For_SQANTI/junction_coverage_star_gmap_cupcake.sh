@@ -12,14 +12,14 @@ STAR --runThreadN 65 --runMode genomeGenerate --genomeDir /../SQANTI_INPUT_GMAP_
 #calculate junction coverage for each cell type from short-read sequencing data using STAR. Calculate expression for each replicate separately
 
 #sample1 (NSC)  - 3 replicates
-STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../short-reads/L222_R1.fastq  /../short-reads/L222_R2.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L222_gc_sj --outSAMtype None --twopassMode Basic
-STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../short-reads/L355_R1.fastq  /../short-reads/L355_R2.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L355_gc_sj --outSAMtype None --twopassMode Basic
-STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../short-reads/L393_R1.fastq  /../short-reads/L393_R2.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L393_gc_sj --outSAMtype None --twopassMode Basic
+STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../SHORT-READS/L222_R1.fastq  /../SHORT-READS/L222_R2.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L222_gc_sj --outSAMtype None --twopassMode Basic
+STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../SHORT-READS/L355_R1.fastq  /../SHORT-READS/L355_R2.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L355_gc_sj --outSAMtype None --twopassMode Basic
+STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../SHORT-READS/L393_R1.fastq  /../SHORT-READS/L393_R2.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L393_gc_sj --outSAMtype None --twopassMode Basic
 #sample2 (NP) - 3 replicates
-STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../short-reads/L223_R2.fastq  /../short-reads/L223_R1.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L223_gc_sj --outSAMtype None --twopassMode Basic
-STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../short-reads/L356_R2.fastq  /../short-reads/L356_R1.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L356_gc_sj --outSAMtype None --twopassMode Basic
-STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../short-reads/L394_R2.fastq  /../short-reads/L394_R1.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L394_gc_sj --outSAMtype None --twopassMode Basic
+STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../SHORT-READS/L223_R2.fastq  /../SHORT-READS/L223_R1.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L223_gc_sj --outSAMtype None --twopassMode Basic
+STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../SHORT-READS/L356_R2.fastq  /../SHORT-READS/L356_R1.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L356_gc_sj --outSAMtype None --twopassMode Basic
+STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../SHORT-READS/L394_R2.fastq  /../SHORT-READS/L394_R1.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L394_gc_sj --outSAMtype None --twopassMode Basic
 #sample3 (N) - 3 replicates
-STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../short-reads/L224_R2.fastq  /../short-reads/L224_R1.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L224_gc_sj --outSAMtype None --twopassMode Basic
-STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../short-reads/L357_R2.fastq  /../short-reads/L357_R1.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L357_gc_sj --outSAMtype None --twopassMode Basic
-STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../short-reads/L395_R2.fastq  /../short-reads/L395_R1.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L395_gc_sj --outSAMtype None --twopassMode Basic
+STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../SHORT-READS/L224_R2.fastq  /../SHORT-READS/L224_R1.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L224_gc_sj --outSAMtype None --twopassMode Basic
+STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../SHORT-READS/L357_R2.fastq  /../SHORT-READS/L357_R1.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L357_gc_sj --outSAMtype None --twopassMode Basic
+STAR --runThreadN 65 --genomeDir /../SQANTI_INPUT_GMAP_CUPCAKE/ --readFilesIn  /../SHORT-READS/L395_R2.fastq  /../SHORT-READS/L395_R1.fastq --outFileNamePrefix /../SQANTI_INPUT_GMAP_CUPCAKE/L395_gc_sj --outSAMtype None --twopassMode Basic

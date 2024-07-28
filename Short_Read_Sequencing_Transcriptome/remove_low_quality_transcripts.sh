@@ -4,10 +4,10 @@
 # Here some clean up to make before proceeding with SQANTI analysis.
 
 # Step 1: Compare with mm10 and annotate the genes according to Ensembl
-gffcompare /../assembly/SRS.gtf -r SRS.gtf -R -M -o /../gffcompare/SRS -V
+GFFCOMPARE /../ASSEMBLY/SRS.gtf -r SRS.gtf -R -M -o /../GFFCOMPARE/SRS -V
 
 # Step 2: Extract bad class code transcripts with awk from the annotated one
-awk '{if($0~"class_code \"(s|e|x|p)\""){print $0}}' /../gffcompare/SRS.annotated.gtf > /../gffcompare/SRS.annotated.bad.tx.gtf
+awk '{if($0~"class_code \"(s|e|x|p)\""){print $0}}' /../GFFCOMPARE/SRS.annotated.gtf > /../GFFCOMPARE/SRS.annotated.bad.tx.gtf
 
 # Step 3: Run R script to process the GTF files
 Rscript --vanilla << EOF
@@ -19,7 +19,7 @@ library(tidyr)
 library(splitstackshape)
 
 # Read the bad transcripts GTF file
-SRS.annotated.bad.tx.gtf <- read.delim("/../gffcompare/SRS.annotated.bad.tx.gtf", header=FALSE)
+SRS.annotated.bad.tx.gtf <- read.delim("/../GFFCOMPARE/SRS.annotated.bad.tx.gtf", header=FALSE)
 
 # Manipulate the data
 gtf.bad <- SRS.annotated.bad.tx.gtf %>% 
@@ -27,7 +27,7 @@ gtf.bad <- SRS.annotated.bad.tx.gtf %>%
   separate(V9, into = c("transcript_id", "rest"), sep = "\\|")
 
 # Read the original GTF file
-gtf <- read.delim("/../assembly/SRS.gtf", header=FALSE)
+gtf <- read.delim("/../ASSEMBLY/SRS.gtf", header=FALSE)
 gtf$ID <- paste(gtf$V9)
 
 # Split concatenated strings into multiple columns
@@ -44,7 +44,7 @@ gtf.good <- subset(gtf.good, !(gtf.good$ID_2 %in% unibp$ID_2))
 gtf.good <- subset(gtf.good, V7 == "+" | V7 == "-")
 
 # Write the filtered data to a file
-write.table(gtf.good, "/../assembly/SRS.gtf", sep="\t", row.names = FALSE, col.names=FALSE, quote=FALSE)
+write.table(gtf.good, "/../ASSEMBLY/SRS.gtf", sep="\t", row.names = FALSE, col.names=FALSE, quote=FALSE)
 
 EOF
 

@@ -58,56 +58,42 @@ NODES <- rbind(NSC.NP.down,NP.N.down) %>% rbind(NSC.NP.up) %>% rbind(NSC.NP.up) 
 
 ##########################
 
-#Check for inclusion isoforms from LRS_SRS transcriptome
+#check for inclusion isoforms from LRS_SRS transcriptome
 
-#Check which AS events have Start and End coordinates that match with both Start and End coordinate of an exon
+#AS event is assigned to a inclusion isoform if their coordinates overlapped, at least partially, with an exon
+#for this compare AS events coordinates with .gtf file
+#AS events that did not have a corresponding inclusion isoform in LRS_SRS were checked for inclusion isoforms in ensembl and refseq
+
+#check which AS events match with both Start and End coordinate of an exon
 as_start_end <- NODES %>% merge(LRS_SRS_transcript_alljncmorethan3,by.x = c("Start", "End", "Strand", "Chr"), by.y = c("V4", "V5", "V7","V1"))%>% subset(select = -c (V2, V3, V6, V8))
 as_start_end_name <- as_start_end %>%subset(select = c("name"))
 as_not_start_end <- NODES %>% subset(select = c("name")) %>% anti_join(as_start_end_name) %>% merge(NODES, by.y="name")
 
-#Check which of the remaining AS events have Start or End coordinates that match with either Start or End coordinate of an exon
+#check which of the remaining AS events that match with either Start or End coordinate of an exon
 as_start <- as_not_start_end %>% merge(LRS_SRS_transcript_alljncmorethan3,by.x = c("Start", "Strand", "Chr"), by.y = c("V4", "V7","V1")) %>% subset(select = -c (V5, V2, V3, V6, V8)) 
 as_end <- as_not_start_end %>% merge(LRS_SRS_transcript_alljncmorethan3,by.x = c("End", "Strand", "Chr"), by.y = c("V5", "V7","V1"))%>% subset(select = -c (V4, V2, V3, V6, V8)) 
 as_start_name <- as_start %>%subset(select = c("name")) %>%distinct() 
 as_end_name <-as_end%>%subset(select = c("name"))%>% distinct()
 as_not_start_and_or_end <-  NODES %>% subset(select = c("name")) %>% setdiff(as_start_end_name) %>% setdiff(as_start_name) %>% setdiff(as_end_name) %>% merge(NODES, by="name")
 
-#check which of the remaining AS events coordinates overlaps an exon
+#check which of the remaining AS events coordinates overlaps at least partially an exon
 #prepare file for bedtools
 as_not_start_and_or_end1 <- as_not_start_and_or_end %>% mutate(Zero = 0) %>% subset(select =c("Chr", "Start", "End", "name", "Zero","Strand")) %>%  mutate(Chr=gsub('^', 'chr', Chr))
 write.table(as_not_start_and_or_end1, "/../ISOFORM/as_not_start_and_or_end_coord.txt", sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)  
-
 LRS_SRS_alljncmorethan3_coord <- LRS_SRS_gtf_alljncmorethan3 %>% separate(V9, into = c("V10", "V11", "V12"), sep = "; ", remove = FALSE) %>% mutate (V10 = gsub('transcript_id ', '', V10)) %>% mutate (V10 = gsub('"', '', V10)) %>% distinct() %>%
   separate(V9, into = c("a", "b", "c"), sep = ";"  ) %>% unite(V9, c("b", "a", "c"), sep = "; ") %>%  mutate(Chr=gsub('^', 'chr', V1))%>% mutate(Zero = 0) %>%
   subset(V3=="exon", select = c("Chr", "V4", "V5", "V9", "Zero", "V7"))
 write.table(LRS_SRS_alljncmorethan3_coord, "/../ISOFORM/LRS_SRS_alljncmorethan3_coord.txt", sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)  
 
-#on shell do bedtools intersect -a /../ISOFORM/LRS_SRS_alljncmorethan3_coord.txt -b /../ISOFORM/as_not_start_and_or_end_coord.txt -wo -s -F 0.99 -filenames > /../ISOFORM/as_overlap.txt
 system("/../ISOFORM/bedtools_lrs_srs.sh")
 
+#output from bedtools
 as_overlap <- read.delim("/../ISOFORM/as_overlap.txt", header=FALSE,  quote="'")
 as_overlap_name <- as_overlap %>%subset(select = c("V10")) %>% dplyr::rename(name=V10)
 as_overlap <- as_overlap %>% subset(select = c("V1", "V4","V6", "V8", "V9", "V10")) %>% mutate(V1 = gsub("chr", "", V1)) %>% setnames( old = c("V1", "V4", "V6", "V8", "V9", "V10"), new = c('Chr','V9', "Strand", "Start", "End", "name"))
 
-#########################
-
-
-
-
-
-#########################
-
-EVENTS <- whipCEnotmerged%>% rbind(whipAAADnotmerged) %>%rbind(whipAAAD1notmerged) %>%subset( select= c('Chr','V9', "Strand", "Start", "End", "name")) %>%rbind(notmergedoverlatirwhip1) %>% distinct() %>% mutate (V9 = gsub('"', '', V9))
-NODES %>% subset(select= c("name")) %>% distinct() %>%nrow()
-EVENTSname <- EVENTS %>% subset(select= c("name")) %>% distinct()
-#total 2682, 68 missing
-
-#AS events that did not overlap 
+#AS events without inclusion isoform in LRS_SRS
 as_not_overlap <-  NODES %>% subset(select = c("name")) %>% distinct()%>% setdiff(as_start_end_name) %>% setdiff(as_start_name) %>% setdiff(as_end_name) %>%setdiff(as_overlap_name) %>%merge(NODES, by="name") 
-
-
-
-
 
 #check if coordinate of the remaining AS events match coord from annotated transcripts
 #filter out low expressed isoforms (less thant 4 reads in at least 1 splice-junction)
@@ -195,15 +181,6 @@ NODESTOBEANALYZED <- intersect(nodesisoexcnodes,EVENTSXnodes)
 #2581 NODES FOR NEXT ANALYSES, But have to recheck removing the fusion opnes
 
 
-cdscoord <- mergedpcstr2.nofus_NOCAP_sqanti_corrected.gtf.cds %>% subset(V3 == "CDS") %>% separate(V9, into = c("V9", "V10"), sep = ";") %>% mutate (V10 = gsub(' transcript_id ', '', V10)) %>% mutate (V10 = gsub('"', '', V10))
-cdscoord1 <- cdscoord %>% dplyr::group_by(V10) %>% mutate(start = min(V4)) %>% mutate(end = max(V5)) %>% subset(select = c("V9", "V10","V7", "start", "end")) %>% distinct()
-cdscoordens <- Ensembl_corrected.gtf.cds %>% subset(V3 == "CDS") %>% separate(V9, into = c("V9", "V10", "V11"), sep = ";") %>% mutate (V10 = gsub(' transcript_id ', '', V10)) %>% mutate (V10 = gsub('"', '', V10))
-cdscoordens1 <- cdscoordens %>% dplyr::group_by(V10) %>% mutate(start = min(V4)) %>% mutate(end = max(V5)) %>% subset(select = c("V9", "V10","V7", "start", "end")) %>% distinct()
-cdscoordref <- mm10.ncbiRefSeq2 %>% subset(V3 == "CDS")  %>% separate(V9, into = c("V10", "V11", "V12"), sep = "; ", remove = FALSE) %>% mutate (V11 = gsub('transcript_id ', '', V11)) %>% mutate (V11 = gsub('"', '', V11)) 
-cdscoordref1 <- cdscoordref %>% dplyr::group_by(V11) %>% mutate(start = min(V4)) %>% mutate(end = max(V5)) %>% subset(select = c("V10", "V11","V7", "start", "end")) %>% distinct() %>% rename(V9 = V10) %>% rename(V10 = V11)
-cdscoordall<- cdscoord1 %>% rbind(cdscoordens1) %>% rbind(cdscoordref1)
-
-
 ################################
 
 #check for exclusion isoforms from LRS_SRS transcriptome
@@ -223,12 +200,41 @@ write.table(refseq_alljncmorethan3_coord, "/../ISOFORM/refseq_alljncmorethan3_co
 write.table(LRS_SRS_alljncmorethan3_coord, "/../ISOFORM/LRS_SRS_alljncmorethan3_coord.txt", sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)  
 write.table(NODES_coord, "/../ISOFORM/NODES_coord.txt", sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)  
 
- system("/../ISOFORM/bedtools_exclusion.sh")
+system("/../ISOFORM/bedtools_exclusion.sh")
 
 #output from bedtools
-eventsexctrpcstr.2022.merged <- read.delim("LRS_SRS_excl_event_tr.txt", header=FALSE)
-eventsexctrens.2022.merged <- read.delim("/ensembl_excl_event_tr.txt", header=FALSE)
-eventsexctrrefseq.2022.merged <- read.delim("refseq_excl_event_tr.2022.merged.txt", header=FALSE)
+LRS_SRS_excl_event_tr <- read.delim("/../ISOFORM/LRS_SRS_excl_event_tr.txt", header=FALSE)
+ensembl_excl_event_tr <- read.delim("/../ISOFORM/ensembl_excl_event_tr.txt", header=FALSE)
+refseq_excl_event_tr <- read.delim("/../ISOFORM/refseq_excl_event_tr.txt", header=FALSE)
+
+#exclusion isoforms in LRS_SRS
+LRS_SRS_excl_nodes <- LRS_SRS_excl_event_tr %>% subset(select = c("V10")) %>% rename(name=V10) %>% distinct()
+LRS_SRS_excl_nodes_iso <- LRS_SRS_excl_event_tr %>% subset(select = c("V4", "V10")) %>% distinct()
+
+#AS events without exclusion isoform in LRS_SRS
+excl_nodes_not_lrssrs <- anti_join(NODES,LRS_SRS_excl_nodes)
+
+#check if coordinate of the remaining AS events is located within an intron of annotated transcripts
+allensembl_excl_nodes <- ensembl_excl_event_tr %>% distinct() %>% subset(select = c("V10")) %>% rename(name=V10) %>% distinct()
+allensembl_excl_nodes_iso <- ensembl_event_tr %>% distinct() %>% subset(select = c("V4", "V10")) %>% distinct()
+ensembl_excl_nodes<- inner_join(excl_nodes_not_lrssrs,allensembl_excl_nodes)%>% distinct() %>% ensembl_excl_nodes %>% subset(select = c("name"))
+ensembl_excl_nodes_iso <- ensembl_excl_nodes %>% distinct() %>% merge(allensembl_excl_nodes_iso, by.x = "name", by.y = "V10" )
+
+#check in refseq
+allrefseq_excl_nodes <- refseq_excl_event_tr %>% distinct() %>% subset(select = c("V10")) %>% rename(name=V10)
+allrefseq_excl_nodes_iso <- refseq_event_tr %>% distinct() %>% subset(select = c("V4", "V10")) 
+refseq_excl_nodes <- inner_join(excl_nodes_not_lrssrs,allrefseq_excl_nodes)%>% distinct() %>% subset(select = c("name"))
+onlyrefseq_excl_nodes <- anti_join(refseq_excl_nodes,ensembl_excl_nodes)
+refseq_excl_nodes_iso <- onlyrefseq_excl_nodes %>% distinct() %>% merge(allrefseq_excl_nodes_iso, by.x = "name", by.y = "V10" )
+
+#join the exclusion isoform in one list
+nodesisoexc <- rbind(LRS_SRS_excl_nodes_iso,ensembl_excl_nodes_iso) %>% rbind(refseq_excl_nodes_iso) %>% distinct() %>% merge(NODES, by = "name")
+nodesisoexcnodes <- nodesisoexc %>% subset(select =c("name")) %>% distinct()
+
+####################################
+
+# select nodes assigned to at least one inclusion and one exclusion isoform for further analysis
+NODESTOBEANALYZED <- intersect(nodesisoexcnodes,EVENTSXnodes)
 
 
 

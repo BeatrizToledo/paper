@@ -154,12 +154,10 @@ system("/../ISOFORM/bedtools_inclusion_ens_ref.sh")
 
 as_overlap_ens <- read.delim("/../ISOFORM/as_overlap_ens.txt", header=FALSE)
 as_overlap_ref <- read.delim("/../ISOFORM/as_overlap_ref.txt", header=FALSE)
-reftocheck <- merge(all.notmerged.simplenamecheck4, notmergedoverlatirrefseq, by.x = "name", by.y = "V10")
-reftocheck1<- reftocheck[grep('PB.11846-27|PB.4956-74', reftocheck$name), ] %>% subset(select = c("V1", "Start", "End", "Strand", "V4", "name"))
-#PB.11846-27|PB.4956-74
-enstocheck <- merge(all.notmerged.simplenamecheck4, notmergedoverlatirensembl, by.x = "name", by.y = "V10") 
-#PB.13554-20|PB.13554-21,22|PB.1837-3|PB.2933-14|PB.2952-10|PB.4067-54|PB.9574-12
-enstocheck1<- enstocheck[grep('PB.13554-20|PB.13554-21,22|PB.1837-3|PB.2933-14|PB.2952-10|PB.4067-54|PB.9574-12', enstocheck$name), ]%>% subset(select = c("V1", "Start", "End", "Strand", "V4", "name"))
+
+reftocheck1<- as_overlap_ref[grep('PB.11846-27|PB.4956-74', as_overlap_ref$name), ] %>% subset(select = c("V1", "Start", "End", "Strand", "V4", "name"))
+enstocheck1<- as_overlap_ens[grep('PB.13554-20|PB.13554-21,22|PB.1837-3|PB.2933-14|PB.2952-10|PB.4067-54|PB.9574-12', as_overlap_ens$name), ]%>% subset(select = c("V1", "Start", "End", "Strand", "V4", "name"))
+
 ANOThave <- rbind(all.ensCE,all.ensstart) %>% rbind(all.ensend1) %>% rbind(all.RefSeqCE1) %>% rbind(all.RefSeqstart1) %>% rbind(all.RefSeqend1)  %>% subset(select =c('name'))
 ANOThave1 <- rbind(reftocheck1) %>% rbind(enstocheck1) %>% subset(select =c('name'))
 ANOThave2 <- rbind(all.ensCE,all.ensstart) %>% rbind(all.ensend1) %>% rbind(all.RefSeqCE1) %>% rbind(all.RefSeqstart1) %>% rbind(all.RefSeqend1)  
